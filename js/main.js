@@ -2,12 +2,11 @@ const fs = require("fs");
 
 var words;
 
-fs.readFile("resources/words.txt", (err, words) => {
+fs.readFile("/resources/words.txt", (err, words) => {
     if (err) throw err;
-    console.log(words.toString());
 });
 
-console.log(words.length);
+console.log(words);
 
-var solution = Math.random();
+//var solution = Math.random(0, words.length);
 
