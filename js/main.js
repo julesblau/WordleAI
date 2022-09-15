@@ -1,12 +1,25 @@
 const fs = require("fs");
 
-var words;
+var validGuesses;
+var possibleSolutions;
 
-fs.readFile("/resources/words.txt", (err, words) => {
-    if (err) throw err;
-});
+function readInLists() {
 
-console.log(words);
+    fs.readFile("/resources/valid_guesses.txt", (err, validGuesses) => {
+        if (err) throw err;
+    });
 
-//var solution = Math.random(0, words.length);
+    console.log(validGuesses);
+
+}
+
+function getRandomInt(max) {
+
+    return Math.floor(Math.random() * max)
+
+}
+
+var chosenWord  = possibleSolutions[getRandomInt(possibleSolutions.length)];
+
+//console.log(chosenWord)
 
