@@ -1,4 +1,5 @@
 import { SOLUTIONS } from "../resources/solutions.js";
+import { GUESSES } from "../resources/valid_guesses.js";
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
@@ -67,9 +68,9 @@ function checkGuess () {
         return
     }
 
-    if (!SOLUTIONS
+    if (!GUESSES
     .includes(guessString)) {
-        toastr.error("Word not in list!")
+        toastr.error("Invalid Guess!")
         return
     }
 
