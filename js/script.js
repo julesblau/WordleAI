@@ -23,6 +23,8 @@ function initBoard() {
 
         board.appendChild(row)
     }
+
+    console.log("test")
 }
 
 function shadeKeyBoard(letter, color) {
