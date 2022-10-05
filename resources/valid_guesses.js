@@ -1,4 +1,5 @@
-['rossa',
+export const GUESSES = [
+'rossa',
 'jetty',
 'wizzo',
 'cuppa',
