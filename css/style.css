@@ -2,7 +2,7 @@ h1 {
  text-align: center;
 }
 
-#game-board {
+#game-boards {
   display: flex;
   align-items: center;
   flex-direction: column;
