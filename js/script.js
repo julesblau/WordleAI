@@ -68,8 +68,7 @@ function checkGuess () {
         return
     }
 
-    if (!GUESSES
-    .includes(guessString)) {
+    if (!GUESSES.includes(guessString)) {
         toastr.error("Invalid Guess!")
         return
     }
