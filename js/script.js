@@ -8,8 +8,8 @@ let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
 
 console.log(rightGuessString)
 
-function initBoard() {
-    let board = document.getElementById("game-board");
+function initBoard(boardName) {
+    let board = document.getElementById(boardName);
 
     for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
         let row = document.createElement("div")
@@ -197,4 +197,5 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
 })
 
-initBoard();
+initBoard("player-game-board");
+initBoard("ai-game-board");
