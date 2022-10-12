@@ -2,6 +2,12 @@ h1 {
  text-align: center;
 }
 
+#game-boards {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
 .center {
   margin-left: auto;
   margin-right: auto;

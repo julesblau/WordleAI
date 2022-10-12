@@ -1,10 +1,12 @@
-import { WORDS } from "../resources/words.js";
+import { SOLUTIONS } from "../resources/solutions.js";
+import { GUESSES } from "../resources/valid_guesses.js";
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
-let rightGuessString = WORDS[Math.floor(Math.random() * WORDS.length)]
+let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS
+.length)]
 
 console.log(rightGuessString)
 
@@ -68,8 +70,8 @@ function checkGuess () {
         return
     }
 
-    if (!WORDS.includes(guessString)) {
-        toastr.error("Word not in list!")
+    if (!GUESSES.includes(guessString)) {
+        toastr.error("Invalid Guess!")
         return
     }
 
