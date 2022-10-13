@@ -175,7 +175,7 @@ document.addEventListener("keyup", (e) => {
 
     if (pressedKey === "Enter") {
         checkGuess()
-        return
+        return //here
     }
 
     let found = pressedKey.match(/[a-z]/gi)
