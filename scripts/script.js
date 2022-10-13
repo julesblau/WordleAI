@@ -1,7 +1,6 @@
 import { SOLUTIONS } from "../resources/solutions.js";
 import { GUESSES } from "../resources/valid_guesses.js";
-import{ sendGuess } from "../server.js";
-
+// import{ sendGuess } from "../server.js";
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;

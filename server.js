@@ -8,7 +8,7 @@ const ls = spawn('python', ['scripts/Easy.py']);
 
 ls.stdout.on('data', (data) => { //EXPORT THIS TO SCRIPT.JS
     var aiGuess = data + '';
-    sendGuess();
+    // sendGuess();
     // exports(aiGuess);
     // console.log(aiGuess);
 });
@@ -17,9 +17,9 @@ ls.stderr.on('data', (data) => {
   console.log(`stderr: ${data}`);
 });
 
-export function sendGuess() {
-    return aiGuess;
-}
+// export function sendGuess() {
+//     return aiGuess;
+// }
 
 // ls.on('close', (code) => {
 //   console.log(`child process exited with code ${code}`);
