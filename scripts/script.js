@@ -201,10 +201,5 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
 })
 
-function recieveAIGuess(){
-    alert(reponse)
-}
-
 initBoard("player-game-board");
 initBoard("ai-game-board");
-recieveAIGuess()
