@@ -1,5 +1,7 @@
 import { SOLUTIONS } from "../resources/solutions.js";
 import { GUESSES } from "../resources/valid_guesses.js";
+import{ sendGuess } from "../server.js";
+
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
@@ -203,3 +205,5 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 initBoard("player-game-board");
 initBoard("ai-game-board");
+
+console.log(sendGuess);
