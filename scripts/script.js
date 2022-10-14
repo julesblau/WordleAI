@@ -1,5 +1,8 @@
-import { SOLUTIONS } from "../resources/solutions.js";
-import { GUESSES } from "../resources/valid_guesses.js";
+// import { SOLUTIONS } from "../resources/solutions.js";
+// import { GUESSES } from "../resources/valid_guesses.js";
+// import { aiGuess } from "../server.cjs";
+var myModule = require('../server.cjs');
+var aiGuess = myModule.aiGuess
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
@@ -203,4 +206,4 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 initBoard("player-game-board");
 initBoard("ai-game-board");
-console.log(aiGuess);
+// console.log(aiGuess);

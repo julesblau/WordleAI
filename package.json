@@ -1,6 +1,14 @@
 {
-  "type" : "module",
+  "type": "module",
   "dependencies": {
-    "live-server": "^1.2.1"
+    "express": "^4.18.2",
+    "live-server": "^1.2.1",
+    "process": "^0.11.10"
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1"
   }
 }
