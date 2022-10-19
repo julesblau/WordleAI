@@ -1,6 +1,6 @@
 import { SOLUTIONS } from "../resources/solutions.js";
 import { GUESSES } from "../resources/valid_guesses.js";
-// import { aiGuess } from "../server.cjs";
+// import { aiGuess } from "../server.js";
 // var myModule = require('../server.cjs');
 // var aiGuess = myModule.aiGuess
 

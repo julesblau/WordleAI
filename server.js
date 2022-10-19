@@ -16,7 +16,7 @@ ls.stderr.on('data', (data) => {
 
 //Launch server
 app.listen(8889, () => {
-  console.log("Application started and Listening on port 8888");
+  console.log("Application started and Listening on port 8889");
 });
 
 //Avoid MIME type checking from browser for boards
