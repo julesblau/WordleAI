@@ -13,6 +13,11 @@ let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS
 
 console.log(rightGuessString)
 
+function toggleDarkMode() {
+    var element = document.body;
+    element.classList.toggle("dark-mode");
+  }
+
 //initialize a board
 function initBoard(boardName) {
     let board = document.getElementById(boardName);
