@@ -1,8 +1,9 @@
+(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 // import { SOLUTIONS } from "../resources/solutions.js";
 // import { GUESSES } from "../resources/valid_guesses.js";
 // import { aiGuess } from "../server.js";
-var myModule = require('../server.js');
-var aiGuess = myModule.aiGuess
+// var myModule = require('../server.cjs');
+// var aiGuess = myModule.aiGuess
 
 const SOLUTIONS = ['hello', 'crate'];
 const GUESSES = ['hello', 'crate'];
@@ -214,4 +215,6 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 initBoard("player-game-board");
 initBoard("ai-game-board");
-console.log(aiGuess);
+// console.log(aiGuess);
+
+},{}]},{},[1]);
