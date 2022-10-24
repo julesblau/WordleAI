@@ -1,5 +1,5 @@
 import numpy as np
-from django.http import HttpResponse
+from django.http import HttpResponse 
 
 #Make random guess
 def randomGuess(_list):

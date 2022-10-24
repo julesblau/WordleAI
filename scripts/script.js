@@ -1,18 +1,14 @@
-// import { SOLUTIONS } from "../resources/solutions.js";
-// import { GUESSES } from "../resources/valid_guesses.js";
+import { SOLUTIONS } from "../resources/solutions.js";
+import { GUESSES } from "../resources/valid_guesses.js";
 // import { aiGuess } from "../server.js";
-var myModule = require('../server.js');
-var aiGuess = myModule.aiGuess
-
-const SOLUTIONS = ['hello', 'crate'];
-const GUESSES = ['hello', 'crate'];
+// var myModule = require('../server.js');
+// var aiGuess = myModule.aiGuess
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
-let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS
-.length)]
+let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 
 console.log(rightGuessString)
 
@@ -214,4 +210,4 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 initBoard("player-game-board");
 initBoard("ai-game-board");
-console.log(aiGuess);
+// console.log(aiGuess);

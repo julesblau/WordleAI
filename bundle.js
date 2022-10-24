@@ -2,8 +2,8 @@
 // import { SOLUTIONS } from "../resources/solutions.js";
 // import { GUESSES } from "../resources/valid_guesses.js";
 // import { aiGuess } from "../server.js";
-// var myModule = require('../server.cjs');
-// var aiGuess = myModule.aiGuess
+var myModule = require('./server.js');
+var aiGuess = myModule.aiGuess
 
 const SOLUTIONS = ['hello', 'crate'];
 const GUESSES = ['hello', 'crate'];
