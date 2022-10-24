@@ -1,3 +1,6 @@
+// Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
+// https://github.com/Morgenstern2573/wordle_clone/blob/master/build/script.js
+
 import { SOLUTIONS } from "../resources/solutions.js";
 import { GUESSES } from "../resources/valid_guesses.js";
 // import { aiGuess } from "../server.js";
@@ -35,7 +38,7 @@ function initBoard(boardName) {
     }
 }
 
-//shade ???
+//shade keyboard after word is submitted
 function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.textContent === letter) {
