@@ -5,15 +5,19 @@ const app = express();
 //Call Easy.py to recieve random guess
 const spawn = require('child_process').spawn;
 const ls = spawn('python', ['scripts/Easy.py']);
-
-ls.stdout.on('data', (data) => { //EXPORT THIS TO SCRIPT.JS
-    var aiGuess = data + '';
-    console.log(aiGuess);
-});
-
+var aiGuess;
+ls.stdout.on('data', (data) => { 
+  aiGuess = data + '';
+ 
+})
 ls.stderr.on('data', (data) => {
   console.log(`stderr: ${data}`);
 });
+
+//Set endpoint for sending python data
+app.get('/py-data', (req, res) => {
+    res.send(aiGuess);
+})
 
 //Launch server
 app.listen(8889, () => {

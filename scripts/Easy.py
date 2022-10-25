@@ -7,7 +7,7 @@ if __name__ == '__main__':
     #Select random guess from solutions
     for i in range(6):
         guess = np.random.choice(_list)
-    #Return guess to server.js
+        #Return guess to server.js
         print(guess)
         sys.stdout.flush()
 

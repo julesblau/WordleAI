@@ -3,9 +3,9 @@
 
 import { SOLUTIONS } from "./resources/solutions.js";
 import { GUESSES } from "./resources/valid_guesses.js";
-// import { aiGuess } from "./server.js";
-// var myModule = require('./server.js');
-// var aiGuess = myModule.aiGuess
+// import https from 'https';
+// const name = require('https');
+// const response = await fetch();
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
@@ -14,7 +14,6 @@ let nextLetter = 0;
 let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 
 console.log(rightGuessString)
-
 function toggleDarkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
@@ -134,6 +133,15 @@ function checkGuess () {
             toastr.info(`The right word was: "${rightGuessString}"`)
         }
     }
+    //NEW STUFF
+    getGuess();
+}
+
+//GET AIGUESS
+async function getGuess(){
+    const aiGuess = await fetch('http://localhost:8889/py-data'); 
+    const aiGuessText = await aiGuess.text();
+    console.log(aiGuessText); 
 }
 
 function insertLetter (pressedKey) {
@@ -213,4 +221,3 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 initBoard("player-game-board");
 initBoard("ai-game-board");
-// console.log(aiGuess);
