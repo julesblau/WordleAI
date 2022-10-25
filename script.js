@@ -65,7 +65,7 @@ function deleteLetter () {
 function turn() {
 
     checkPlayerGuess()
-    checkAIGuess
+    checkAIGuess()
 
 }
 
