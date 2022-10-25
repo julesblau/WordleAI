@@ -131,15 +131,12 @@ function checkPlayerGuess () {
         guessesRemaining -= 1;
         currentGuess = [];
         nextLetter = 0;
-
-        if (guessesRemaining === 0) {
-            toastr.error("You've run out of guesses! Game over!")
-            toastr.info(`The right word was: "${rightGuessString}"`)
-        }
     }
 }
 
 function checkAIGuess() {
+
+    let aiGuessText = getGuess();
 
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
     let guessString = aiGuessText[6- guessesRemaining]
@@ -190,20 +187,19 @@ function checkAIGuess() {
         nextLetter = 0;
 
         if (guessesRemaining === 0) {
-            toastr.error("You've run out of guesses! Game over!")
+            toastr.info("Neither player got it! It's a draw!")
             toastr.info(`The right word was: "${rightGuessString}"`)
         }
     }
-    //NEW STUFF
-    getGuess();
-
 }
 
 //GET AIGUESS
 async function getGuess(){
     const aiGuess = await fetch('http://localhost:8889/py-data'); 
     const aiGuessText = await aiGuess.text();
-    console.log(aiGuessText); 
+    // console.log(aiGuessText); 
+
+    return aiGuessText;
 }
 
 function insertLetter (pressedKey) {
