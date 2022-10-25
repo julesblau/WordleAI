@@ -1,11 +1,11 @@
 // Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
 // https://github.com/Morgenstern2573/wordle_clone/blob/master/build/script.js
 
-import { SOLUTIONS } from "../resources/solutions.js";
-import { GUESSES } from "../resources/valid_guesses.js";
-// import { aiGuess } from "../server.js";
-var myModule = require('../server.js');
-var aiGuess = myModule.aiGuess
+import { SOLUTIONS } from "./resources/solutions.js";
+import { GUESSES } from "./resources/valid_guesses.js";
+// import { aiGuess } from "./server.js";
+// var myModule = require('./server.js');
+// var aiGuess = myModule.aiGuess
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
