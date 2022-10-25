@@ -62,7 +62,14 @@ function deleteLetter () {
     nextLetter -= 1
 }
 
-function checkGuess () {
+function turn() {
+
+    checkPlayerGuess()
+    checkAIGuess
+
+}
+
+function checkPlayerGuess () {
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
     let guessString = ''
     let rightGuess = Array.from(rightGuessString)
@@ -130,8 +137,66 @@ function checkGuess () {
             toastr.info(`The right word was: "${rightGuessString}"`)
         }
     }
+}
+
+function checkAIGuess() {
+
+    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let guessString = aiGuessText[6- guessesRemaining]
+    let rightGuess = Array.from(rightGuessString)
+    currentGuess = Array.from(guessString)
+    
+    for (let i = 0; i < 5; i++) {
+        let letterColor = ''
+        let box = row.children[i]
+        let letter = currentGuess[i]
+        
+        let letterPosition = rightGuess.indexOf(currentGuess[i])
+        // is letter in the correct guess
+        if (letterPosition === -1) {
+            letterColor = 'grey'
+        } else {
+            // now, letter is definitely in word
+            // if letter index and right guess index are the same
+            // letter is in the right position 
+            if (currentGuess[i] === rightGuess[i]) {
+                // shade green 
+                letterColor = 'green'
+            } else {
+                // shade box yellow
+                letterColor = 'yellow'
+            }
+
+            rightGuess[letterPosition] = "#"
+        }
+
+        let delay = 250 * i
+        setTimeout(()=> {
+            //flip box
+            animateCSS(box, 'flipInX')
+            //shade box
+            box.style.backgroundColor = letterColor
+            shadeKeyBoard(letter, letterColor)
+        }, delay)
+    }
+
+    if (guessString === rightGuessString) {
+        toastr.error("The AI guessed right! Game over!")
+        guessesRemaining = 0
+        return
+    } else {
+        guessesRemaining -= 1;
+        currentGuess = [];
+        nextLetter = 0;
+
+        if (guessesRemaining === 0) {
+            toastr.error("You've run out of guesses! Game over!")
+            toastr.info(`The right word was: "${rightGuessString}"`)
+        }
+    }
     //NEW STUFF
     getGuess();
+
 }
 
 //GET AIGUESS
@@ -189,7 +254,7 @@ document.addEventListener("keyup", (e) => {
     }
 
     if (pressedKey === "Enter") {
-        checkGuess()
+        turn()
         return //here
     }
 
