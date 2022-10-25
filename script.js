@@ -3,9 +3,6 @@
 
 import { SOLUTIONS } from "./resources/solutions.js";
 import { GUESSES } from "./resources/valid_guesses.js";
-// import https from 'https';
-// const name = require('https');
-// const response = await fetch();
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
