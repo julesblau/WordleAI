@@ -67,8 +67,11 @@ function deleteLetter () {
 
 function turn() {
 
-    checkPlayerGuess()
-    checkAIGuess()
+    if (checkPlayerGuess()) {
+
+        checkAIGuess()
+
+    }
 
 }
 
@@ -83,14 +86,13 @@ function checkPlayerGuess () {
 
     if (guessString.length != 5) {
         toastr.error("Not enough letters!")
-        return
+        return false
     }
 
     if (!GUESSES.includes(guessString)) {
         toastr.error("Invalid Guess!")
-        return
+        return false
     }
-
     
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
