@@ -16,6 +16,18 @@ h1 {
   color: black;
 }
 
+.button {
+  margin: 0 auto;
+  width: 50%;
+  min-height: 30px;
+  display: block;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+.button:hover {
+  background-color: green;
+}
+
 a:link {
   text-decoration: none;
 }

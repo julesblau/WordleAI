@@ -66,13 +66,9 @@ function deleteLetter () {
 }
 
 function turn() {
-
     if (checkPlayerGuess()) {
-
         checkAIGuess()
-
     }
-
 }
 
 function checkPlayerGuess () {
@@ -141,13 +137,12 @@ function checkPlayerGuess () {
 
 function checkAIGuess() {
 
-    let aiGuessText = getGuess();
-
-    let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
-    let guessString = aiGuessText
+    let guessString = getGuess().then((value) => {console.log(value)});
     console.log(guessString)
+    let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString)
+    console.log(currentGuess)
     
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
