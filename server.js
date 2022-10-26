@@ -2,7 +2,7 @@
 const express = require("express");
 const app = express();
 
-//Call Easy.py to recieve random guess
+//Call Easy.py to recieve First  guess
 const spawn = require('child_process').spawn;
 const ls = spawn('python', ['scripts/Easy.py']);
 var aiGuess;
@@ -13,7 +13,7 @@ ls.stderr.on('data', (data) => {
   console.log(`stderr: ${data}`);
 });
 
-//Set endpoint for sending python data
+//Set endpoint for sending python data. Collect Ensuing Guesses
 app.get('/py-data', (req, res) => {
   const spawn = require('child_process').spawn;
   const ls = spawn('python', ['scripts/Easy.py']);
