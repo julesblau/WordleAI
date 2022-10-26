@@ -139,7 +139,7 @@ function checkAIGuess() {
     let aiGuessText = getGuess();
 
     let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let guessString = aiGuessText[6- guessesRemaining]
+    let guessString = aiGuessText[6- guessesRemaining] //aiGuessText is not an array yet, I think this might be the issue
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString)
     
@@ -173,7 +173,7 @@ function checkAIGuess() {
             animateCSS(box, 'flipInX')
             //shade box
             box.style.backgroundColor = letterColor
-            shadeKeyBoard(letter, letterColor)
+            shadeKeyBoard(letter, letterColor) //dont shade keyboard after AI Guess?
         }, delay)
     }
 
@@ -197,7 +197,6 @@ function checkAIGuess() {
 async function getGuess(){
     const aiGuess = await fetch('http://localhost:8889/py-data'); 
     const aiGuessText = await aiGuess.text();
-    // console.log(aiGuessText); 
     return aiGuessText;
 }
 
