@@ -8,7 +8,6 @@ const ls = spawn('python', ['scripts/Easy.py']);
 var aiGuess;
 ls.stdout.on('data', (data) => { 
   aiGuess = data + '';
- 
 })
 ls.stderr.on('data', (data) => {
   console.log(`stderr: ${data}`);

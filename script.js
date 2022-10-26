@@ -198,7 +198,6 @@ async function getGuess(){
     const aiGuess = await fetch('http://localhost:8889/py-data'); 
     const aiGuessText = await aiGuess.text();
     // console.log(aiGuessText); 
-
     return aiGuessText;
 }
 
