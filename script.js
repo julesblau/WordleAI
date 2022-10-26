@@ -22,10 +22,13 @@ function initBoard(boardName) {
 
     for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
         let row = document.createElement("div")
+        row.id = boardName + "-letter-row"
         row.className = "letter-row"
+        
         
         for (let j = 0; j < 5; j++) {
             let box = document.createElement("div")
+            box.id = boardName + "-letter-box"
             box.className = "letter-box"
             row.appendChild(box)
         }
@@ -54,7 +57,7 @@ function shadeKeyBoard(letter, color) {
 }
 
 function deleteLetter () {
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let box = row.children[nextLetter - 1]
     box.textContent = ""
     box.classList.remove("filled-box")
@@ -65,12 +68,12 @@ function deleteLetter () {
 function turn() {
 
     checkPlayerGuess()
-    checkAIGuess
+    checkAIGuess()
 
 }
 
 function checkPlayerGuess () {
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let guessString = ''
     let rightGuess = Array.from(rightGuessString)
 
@@ -128,7 +131,6 @@ function checkPlayerGuess () {
         guessesRemaining = 0
         return
     } else {
-        guessesRemaining -= 1;
         currentGuess = [];
         nextLetter = 0;
     }
@@ -138,8 +140,9 @@ function checkAIGuess() {
 
     let aiGuessText = getGuess();
 
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
-    let guessString = aiGuessText[6- guessesRemaining]
+    let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
+    let guessString = aiGuessText
+    console.log(guessString)
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString)
     
@@ -208,7 +211,7 @@ function insertLetter (pressedKey) {
     }
     pressedKey = pressedKey.toLowerCase()
 
-    let row = document.getElementsByClassName("letter-row")[6 - guessesRemaining]
+    let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let box = row.children[nextLetter]
     animateCSS(box, "pulse")
     box.textContent = pressedKey
