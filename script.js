@@ -131,7 +131,7 @@ function checkPlayerGuess () {
     if (guessString === rightGuessString) {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
-        return true;
+        return false;
     } else {
         currentGuess = [];
         nextLetter = 0;
