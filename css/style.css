@@ -11,8 +11,33 @@ body{
 }
 
 h1 {
- text-align: center;
+  text-align: center;
+  text-decoration: none;
+  color: black;
 }
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
+
+.title {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  
+ }
 
 #game-boards {
   display: flex;
