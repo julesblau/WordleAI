@@ -179,7 +179,7 @@ function checkAIGuess() {
             animateCSS(box, 'flipInX')
             //shade box
             box.style.backgroundColor = letterColor
-            shadeKeyBoard(letter, letterColor) //dont shade keyboard after AI Guess?
+            box.classList.add("filled-box")
         }, delay)
     }
 
@@ -225,7 +225,6 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
   // We create a Promise and return it
   new Promise((resolve, reject) => {
     const animationName = `${prefix}${animation}`;
-    // const node = document.querySelector(element);
     const node = element
     node.style.setProperty('--animate-duration', '0.3s');
     
