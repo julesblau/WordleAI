@@ -135,9 +135,11 @@ function checkPlayerGuess () {
     }
 }
 
-function checkAIGuess() {
+async function checkAIGuess() {
 
-    let guessString = getGuess().then((value) => {console.log(value)});
+    let guessString = getGuess().then((value) => {console.log(value) 
+    return value});
+    guessString = await guessString;
     console.log(guessString)
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
