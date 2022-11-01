@@ -1,14 +1,15 @@
-# import numpy as np
+import numpy as np
+import sys
+import string
 # from django.http import HttpResponse 
 
-# #Make random guess
-# def randomGuess(_list):
-#     guess = np.random.choice(_list)
-#     return guess
+pathJack = "/Users/jmayrides/git"
+pathJules = "/Users/julesblau/Desktop"
+pathJake = "/Applications/MAMP/htdocs"
 
-# if __name__ == '__main__':
-#     #Read in WordList
-#     _list = np.loadtxt("/Users/julesblau/Desktop/WordleAI/resources/possible_solutions.txt", dtype='str')
-#     guess = randomGuess(_list)
-#     reponse = HttpResponse(guess, content_type)="text/plain"
-#     print reponse
+if __name__ == '__main__':
+    #Read in WordList
+    _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str') 
+    # Map is {Letter Position(0-4): A-Z}
+    possible_letters = dict.fromkeys(range(5), list(string.ascii_lowercase))
+    
