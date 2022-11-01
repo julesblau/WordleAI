@@ -137,8 +137,14 @@ function checkPlayerGuess () {
 
 function checkAIGuess() {
 
-    let guessString = getGuess().then((value) => {console.log(value)});
-    console.log(guessString)
+    let guessString = undefined
+    // console.log(guessString.length);
+    while (guessString == undefined){
+        // console.log("waiting");
+        guessString = getGuess();//.then((value) => {console.log(value)});
+        console.log(guessString)
+    }
+    // console.log(guessString)
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString)
