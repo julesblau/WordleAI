@@ -19,6 +19,6 @@ if __name__ == '__main__':
 
     #CASE TO CONSIDER:
     #Guess is "guess" and one 's' is yellow and one is gray
-    # Maybe a set of yellow letters that need to be in the final word??
+    # Maybe a set of yellow/green letters that need to be in the final word??
     
     
