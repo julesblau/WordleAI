@@ -4,11 +4,11 @@ const app = express();
 
 //Call Easy.py to recieve First  guess
 var aiGuess;
-getGuess()
+getGuessEasy()
 
 //Set endpoint for sending python data. Collect Ensuing Guesses
-app.get('/py-data', (req, res) => {
-  getGuess();
+app.get('/py-data-easy', (req, res) => {
+  getGuessEasy();
   res.send(aiGuess);
 })
 
@@ -20,9 +20,9 @@ app.listen(8889, () => {
 //Avoid MIME type checking from browser for boards
 app.use(express.static(__dirname));
 
-function getGuess() {
+function getGuessEasy() {
   const spawn = require('child_process').spawn;
-  const ls = spawn('python3', ['scripts/Easy.py']);
+  const ls = spawn('python', ['scripts/Easy.py']);
   ls.stdout.on('data', (data) => {
     aiGuess = data + '';
   });

@@ -1,7 +1,6 @@
 import numpy as np
 import sys
 import string
-# from django.http import HttpResponse 
 
 pathJack = "/Users/jmayrides/git"
 pathJules = "/Users/julesblau/Desktop"
