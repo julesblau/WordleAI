@@ -9,6 +9,7 @@ let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
 let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
+let aiGuessHistory = [];
 
 console.log(rightGuessString)
 function toggleDarkMode() {
@@ -127,6 +128,7 @@ function checkPlayerGuess () {
     if (guessString === rightGuessString) {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
+        fillAiBoard();
         return false;
     } else {
         currentGuess = [];
@@ -137,14 +139,12 @@ function checkPlayerGuess () {
 
 async function checkAIGuess() {
 
-    let guessString = getGuess().then((value) => {console.log(value) 
-    return value});
+    let guessString = getGuess().then((value) => {return value});
     guessString = await guessString;
-    console.log(guessString)
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
-    currentGuess = Array.from(guessString)
-    console.log(currentGuess)
+    currentGuess = Array.from(guessString).slice(0, -1)
+    aiGuessHistory.push(currentGuess)
     
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -183,6 +183,7 @@ async function checkAIGuess() {
     if (guessString === rightGuessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
+        fillAiBoard()
         return
     } else {
         guessesRemaining -= 1;
@@ -190,6 +191,7 @@ async function checkAIGuess() {
         nextLetter = 0;
 
         if (guessesRemaining === 0) {
+            fillAiBoard()
             toastr.info("Neither player got it! It's a draw!")
             toastr.info(`The right word was: "${rightGuessString}"`)
         }
@@ -201,6 +203,18 @@ async function getGuess(){
     const aiGuess =  await fetch('http://localhost:8889/py-data'); 
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
+}
+
+function fillAiBoard() {
+
+    for (let i = 0; i < aiGuessHistory.length; i++) {
+        let row = document.getElementById("ai-game-board").children[i]
+        for (let j = 0; j < 5; j++) {
+            let box = row.children[j]
+            box.textContent = aiGuessHistory[i][j]
+        }        
+    }
+
 }
 
 function insertLetter (pressedKey) {

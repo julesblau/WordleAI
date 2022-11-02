@@ -9,7 +9,7 @@ pathJake = "/Applications/MAMP/htdocs"
 
 if __name__ == '__main__':
     #Read in WordList
-    _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str') 
+    _list = np.loadtxt(pathJack + "/WordleAI/resources/solutions.txt", dtype='str') 
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(1,6), list(string.ascii_lowercase))
     
