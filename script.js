@@ -5,9 +5,9 @@ import { SOLUTIONS } from "./resources/solutions.js";
 import { GUESSES } from "./resources/valid_guesses.js";
 
 const Difficulty = {
-	Easy: "easy",
-	Medium: "medium",
-	Hard: "hard",
+    Easy: "easy",
+    Medium: "medium",
+    Hard: "hard",
 }
 
 let currDifficulty = Difficulty.Easy
@@ -20,10 +20,11 @@ let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = [];
 
 console.log(rightGuessString)
+
 function toggleDarkMode() {
     var element = document.body;
     element.classList.toggle("dark-mode");
-  }
+}
 
 function initBoard(boardName) {
     let board = document.getElementById(boardName);
@@ -32,8 +33,8 @@ function initBoard(boardName) {
         let row = document.createElement("div")
         row.id = boardName + "-letter-row"
         row.className = "letter-row"
-        
-        
+
+
         for (let j = 0; j < 5; j++) {
             let box = document.createElement("div")
             box.id = boardName + "-letter-box"
@@ -45,40 +46,13 @@ function initBoard(boardName) {
     }
 }
 
-function shadeKeyBoard(letter, color) {
-    for (const elem of document.getElementsByClassName("keyboard-button")) {
-        if (elem.textContent === letter) {
-            let oldColor = elem.style.backgroundColor
-            if (oldColor === 'green') {
-                return
-            } 
-
-            if (oldColor === 'yellow' && color !== 'green') {
-                return
-            }
-
-            elem.style.backgroundColor = color
-            break
-        }
-    }
-}
-
-function deleteLetter () {
-    let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
-    let box = row.children[nextLetter - 1]
-    box.textContent = ""
-    box.classList.remove("filled-box")
-    currentGuess.pop()
-    nextLetter -= 1
-}
-
 function turn() {
     if (checkPlayerGuess()) {
         checkAIGuess()
     }
 }
 
-function checkPlayerGuess () {
+function checkPlayerGuess() {
     let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let guessString = ''
     let rightGuess = Array.from(rightGuessString)
@@ -96,12 +70,12 @@ function checkPlayerGuess () {
         toastr.error("Invalid Guess!")
         return false
     }
-    
+
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
         let box = row.children[i]
         let letter = currentGuess[i]
-        
+
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         if (letterPosition === -1) {
             letterColor = 'grey'
@@ -116,7 +90,7 @@ function checkPlayerGuess () {
         }
 
         let delay = 250 * i
-        setTimeout(()=> {
+        setTimeout(() => {
             animateCSS(box, 'flipInX')
             box.style.backgroundColor = letterColor
             shadeKeyBoard(letter, letterColor)
@@ -141,10 +115,13 @@ async function checkAIGuess() {
 
     switch (currDifficulty) {
         case Difficulty.Easy:
-            guessString = getGuessEasy().then((value) => {return value});
+            guessString = getGuessEasy().then((value) => { return value });
+            break;
+        case Difficulty.Easy:
+            guessString = getGuessMedium().then((value) => { return value });
             break;
         default:
-            guessString = getGuessMediumHard().then((value) => {return value});
+            guessString = getGuessHard().then((value) => { return value });
     }
 
     guessString = await guessString;
@@ -152,12 +129,12 @@ async function checkAIGuess() {
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
     aiGuessHistory.push(currentGuess)
-    
+
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
         let box = row.children[i]
         let letter = currentGuess[i]
-        
+
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         if (letterPosition === -1) {
             letterColor = 'grey'
@@ -172,7 +149,7 @@ async function checkAIGuess() {
         }
 
         let delay = 250 * i
-        setTimeout(()=> {
+        setTimeout(() => {
             animateCSS(box, 'flipInX')
             box.style.backgroundColor = letterColor
             box.classList.add("filled-box")
@@ -197,14 +174,20 @@ async function checkAIGuess() {
     }
 }
 
-async function getGuessEasy(){
-    const aiGuess =  await fetch('http://localhost:8889/py-data-easy'); 
+async function getGuessEasy() {
+    const aiGuess = await fetch('http://localhost:8889/py-data-easy');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
 }
 
-async function getGuessMediumHard(){
-    const aiGuess =  await fetch('http://localhost:8889/py-data-medium-hard'); 
+async function getGuessMedium() {
+    const aiGuess = await fetch('http://localhost:8889/py-data-medium');
+    const aiGuessText = await aiGuess.text();
+    return aiGuessText;
+}
+
+async function getGuessHard() {
+    const aiGuess = await fetch('http://localhost:8889/py-data-hard');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
 }
@@ -216,12 +199,12 @@ function fillAiBoard() {
         for (let j = 0; j < 5; j++) {
             let box = row.children[j]
             box.textContent = aiGuessHistory[i][j]
-        }        
+        }
     }
 
 }
 
-function insertLetter (pressedKey) {
+function insertLetter(pressedKey) {
     if (nextLetter === 5) {
         return
     }
@@ -237,21 +220,21 @@ function insertLetter (pressedKey) {
 }
 
 const animateCSS = (element, animation, prefix = 'animate__') =>
-  new Promise((resolve, reject) => {
-    const animationName = `${prefix}${animation}`;
-    const node = element
-    node.style.setProperty('--animate-duration', '0.3s');
-    
-    node.classList.add(`${prefix}animated`, animationName);
+    new Promise((resolve, reject) => {
+        const animationName = `${prefix}${animation}`;
+        const node = element
+        node.style.setProperty('--animate-duration', '0.3s');
 
-    function handleAnimationEnd(event) {
-      event.stopPropagation();
-      node.classList.remove(`${prefix}animated`, animationName);
-      resolve('Animation ended');
-    }
+        node.classList.add(`${prefix}animated`, animationName);
 
-    node.addEventListener('animationend', handleAnimationEnd, {once: true});
-});
+        function handleAnimationEnd(event) {
+            event.stopPropagation();
+            node.classList.remove(`${prefix}animated`, animationName);
+            resolve('Animation ended');
+        }
+
+        node.addEventListener('animationend', handleAnimationEnd, { once: true });
+    });
 
 document.addEventListener("keyup", (e) => {
 
@@ -280,7 +263,7 @@ document.addEventListener("keyup", (e) => {
 
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     const target = e.target
-    
+
     if (!target.classList.contains("keyboard-button")) {
         return
     }
@@ -288,10 +271,37 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
     if (key === "Del") {
         key = "Backspace"
-    } 
+    }
 
-    document.dispatchEvent(new KeyboardEvent("keyup", {'key': key}))
+    document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
 })
+
+function shadeKeyBoard(letter, color) {
+    for (const elem of document.getElementsByClassName("keyboard-button")) {
+        if (elem.textContent === letter) {
+            let oldColor = elem.style.backgroundColor
+            if (oldColor === 'green') {
+                return
+            }
+
+            if (oldColor === 'yellow' && color !== 'green') {
+                return
+            }
+
+            elem.style.backgroundColor = color
+            break
+        }
+    }
+}
+
+function deleteLetter() {
+    let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
+    let box = row.children[nextLetter - 1]
+    box.textContent = ""
+    box.classList.remove("filled-box")
+    currentGuess.pop()
+    nextLetter -= 1
+}
 
 initBoard("player-game-board");
 initBoard("ai-game-board");
