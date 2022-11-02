@@ -15,7 +15,7 @@ app.get('/py-data-easy', (req, res) => {
 //Get Easy Guess
 function getGuessEasy() {
   const spawn = require('child_process').spawn;
-  const ls = spawn('python', ['scripts/Easy.py']);
+  const ls = spawn('python3', ['scripts/Easy.py']);
   ls.stdout.on('data', (data) => {
     aiGuess = data + '';
   });
