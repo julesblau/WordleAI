@@ -10,7 +10,7 @@ const Difficulty = {
     Hard: "hard",
 }
 
-let currDifficulty = Difficulty.Easy
+let currDifficulty = Difficulty.Easy //default to easy
 const params = new URLSearchParams(document.location.search);
 const diffParam = params.get("difficulty");
 currDifficulty = diffParam
@@ -184,6 +184,7 @@ async function getGuessEasy() {
 }
 
 async function getGuessMedium() {
+    //i think sending nothing at first is what may mess up the get request
     fetch('http://localhost:8889/py-data-medium-post', 
     {   
         method: 'POST',
@@ -196,17 +197,10 @@ async function getGuessMedium() {
             guess: aiGuessHistory
         })
     });
-    // .then(function(response){
-    //     if(response.ok){
-    //         console.log('POST SUCCESS');
-    //         return;
-    //     }
-    //     throw new Error('POST failed');
-    // }).catch(function(error){
-    //     console.log(error);
-    // });
+
     const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
     const aiGuessText = await aiGuess.text();
+    console.log(aiGuessText)
     return aiGuessText;
 }
 
