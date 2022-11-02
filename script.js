@@ -4,6 +4,14 @@
 import { SOLUTIONS } from "./resources/solutions.js";
 import { GUESSES } from "./resources/valid_guesses.js";
 
+const Difficulty = {
+	Easy: "easy",
+	Medium: "medium",
+	Hard: "hard",
+}
+
+let currDifficulty = Difficulty.Easy
+
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
@@ -129,13 +137,21 @@ function checkPlayerGuess () {
 
 async function checkAIGuess() {
 
-    let guessString = getGuess().then((value) => {return value});
+    let guessString = null;
+
+    switch (currDifficulty) {
+        case Difficulty.Easy:
+            guessString = getGuessEasy().then((value) => {return value});
+            break;
+        default:
+            guessString = getGuessMediumHard().then((value) => {return value});
+    }
+
     guessString = await guessString;
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
     aiGuessHistory.push(currentGuess)
-    console.log(aiGuessHistory)
     
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -181,8 +197,14 @@ async function checkAIGuess() {
     }
 }
 
-async function getGuess(){
+async function getGuessEasy(){
     const aiGuess =  await fetch('http://localhost:8889/py-data-easy'); 
+    const aiGuessText = await aiGuess.text();
+    return aiGuessText;
+}
+
+async function getGuessMediumHard(){
+    const aiGuess =  await fetch('http://localhost:8889/py-data-medium-hard'); 
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
 }
