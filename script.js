@@ -17,7 +17,6 @@ function toggleDarkMode() {
     element.classList.toggle("dark-mode");
   }
 
-//initialize a board
 function initBoard(boardName) {
     let board = document.getElementById(boardName);
 
@@ -38,7 +37,6 @@ function initBoard(boardName) {
     }
 }
 
-//shade keyboard after word is submitted
 function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.textContent === letter) {
@@ -97,18 +95,12 @@ function checkPlayerGuess () {
         let letter = currentGuess[i]
         
         let letterPosition = rightGuess.indexOf(currentGuess[i])
-        // is letter in the correct guess
         if (letterPosition === -1) {
             letterColor = 'grey'
         } else {
-            // now, letter is definitely in word
-            // if letter index and right guess index are the same
-            // letter is in the right position 
             if (currentGuess[i] === rightGuess[i]) {
-                // shade green 
                 letterColor = 'green'
             } else {
-                // shade box yellow
                 letterColor = 'yellow'
             }
 
@@ -117,9 +109,7 @@ function checkPlayerGuess () {
 
         let delay = 250 * i
         setTimeout(()=> {
-            //flip box
             animateCSS(box, 'flipInX')
-            //shade box
             box.style.backgroundColor = letterColor
             shadeKeyBoard(letter, letterColor)
         }, delay)
@@ -145,6 +135,7 @@ async function checkAIGuess() {
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
     aiGuessHistory.push(currentGuess)
+    console.log(aiGuessHistory)
     
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -152,18 +143,12 @@ async function checkAIGuess() {
         let letter = currentGuess[i]
         
         let letterPosition = rightGuess.indexOf(currentGuess[i])
-        // is letter in the correct guess
         if (letterPosition === -1) {
             letterColor = 'grey'
         } else {
-            // now, letter is definitely in word
-            // if letter index and right guess index are the same
-            // letter is in the right position 
             if (currentGuess[i] === rightGuess[i]) {
-                // shade green 
                 letterColor = 'green'
             } else {
-                // shade box yellow
                 letterColor = 'yellow'
             }
 
@@ -172,9 +157,7 @@ async function checkAIGuess() {
 
         let delay = 250 * i
         setTimeout(()=> {
-            //flip box
             animateCSS(box, 'flipInX')
-            //shade box
             box.style.backgroundColor = letterColor
             box.classList.add("filled-box")
         }, delay)
@@ -186,9 +169,9 @@ async function checkAIGuess() {
         fillAiBoard()
         return
     } else {
-        guessesRemaining -= 1;
-        currentGuess = [];
-        nextLetter = 0;
+        guessesRemaining -= 1
+        currentGuess = []
+        nextLetter = 0
 
         if (guessesRemaining === 0) {
             fillAiBoard()
@@ -198,7 +181,6 @@ async function checkAIGuess() {
     }
 }
 
-//GET AIGUESS
 async function getGuess(){
     const aiGuess =  await fetch('http://localhost:8889/py-data'); 
     const aiGuessText = await aiGuess.text();
@@ -233,7 +215,6 @@ function insertLetter (pressedKey) {
 }
 
 const animateCSS = (element, animation, prefix = 'animate__') =>
-  // We create a Promise and return it
   new Promise((resolve, reject) => {
     const animationName = `${prefix}${animation}`;
     const node = element
@@ -241,7 +222,6 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
     
     node.classList.add(`${prefix}animated`, animationName);
 
-    // When the animation ends, we clean the classes and resolve the Promise
     function handleAnimationEnd(event) {
       event.stopPropagation();
       node.classList.remove(`${prefix}animated`, animationName);
@@ -265,7 +245,7 @@ document.addEventListener("keyup", (e) => {
 
     if (pressedKey === "Enter") {
         turn()
-        return //here
+        return
     }
 
     let found = pressedKey.match(/[a-z]/gi)
