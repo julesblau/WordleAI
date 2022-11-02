@@ -181,6 +181,7 @@ async function getGuessEasy() {
 }
 
 async function getGuessMedium() {
+    // const context = await fetch('http://localhost:8889/py-data-medium-post')
     const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
