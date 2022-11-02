@@ -189,20 +189,19 @@ async function getGuessMedium() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+            //patse through history, send with context
             guess: aiGuessHistory
         })
-    }).then(function(response){
-        if(response.ok){
-            console.log('POST SUCCESS');
-            return;
-        }
-        throw new Error('POST failed');
-    }).catch(function(error){
-        console.log(error);
     });
-
-  
-
+    // .then(function(response){
+    //     if(response.ok){
+    //         console.log('POST SUCCESS');
+    //         return;
+    //     }
+    //     throw new Error('POST failed');
+    // }).catch(function(error){
+    //     console.log(error);
+    // });
     const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
