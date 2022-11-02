@@ -3,6 +3,7 @@ const express = require("express");
 const app = express();
 
 //Recieve random guess to start always
+var context;
 var aiGuess;
 getGuessEasy()
 
@@ -30,9 +31,11 @@ app.get('/py-data-medium-get', (req, res) => {
 })
 
 //Set endpoint to recieve data from Script for Python AI
-app.post('/py-data-medium-post'), (req, res) => {
+app.post('/py-data-medium-post'), async (req, res) => {
   // this is going to need an argument
-  getGuessMedium(); 
+  context = await req.body;
+  console.log("Context:" + context)
+  // getGuessMedium(); 
 }
 
 //Get Medium Guess
