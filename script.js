@@ -11,6 +11,9 @@ const Difficulty = {
 }
 
 let currDifficulty = Difficulty.Easy
+const params = new URLSearchParams(document.location.search);
+const diffParam = params.get("difficulty");
+currDifficulty = diffParam
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
