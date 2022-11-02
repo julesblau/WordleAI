@@ -1,6 +1,7 @@
 //We use express for Browser to interpret HTML
 const express = require("express");
 const app = express();
+app.use(express.json());
 
 //Recieve random guess to start always
 var context;
@@ -31,12 +32,12 @@ app.get('/py-data-medium-get', (req, res) => {
 })
 
 //Set endpoint to recieve data from Script for Python AI
-app.post('/py-data-medium-post'), async (req, res) => {
+app.post('/py-data-medium-post',  (req, res) => {
   // this is going to need an argument
-  context = await req.body;
+  context =  req.body.guess;
   console.log("Context:" + context)
-  // getGuessMedium(); 
-}
+  getGuessMedium();
+})
 
 //Get Medium Guess
 function getGuessMedium() {

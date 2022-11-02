@@ -10,7 +10,7 @@ const Difficulty = {
     Hard: "hard",
 }
 
-let currDifficulty = Difficulty.Easy
+let currDifficulty = Difficulty.Medium
 
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
@@ -181,7 +181,28 @@ async function getGuessEasy() {
 }
 
 async function getGuessMedium() {
-    // const context = await fetch('http://localhost:8889/py-data-medium-post')
+    fetch('http://localhost:8889/py-data-medium-post', 
+    {   
+        method: 'POST',
+        headers:
+        {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            guess: aiGuessHistory
+        })
+    }).then(function(response){
+        if(response.ok){
+            console.log('POST SUCCESS');
+            return;
+        }
+        throw new Error('POST failed');
+    }).catch(function(error){
+        console.log(error);
+    });
+
+  
+
     const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
