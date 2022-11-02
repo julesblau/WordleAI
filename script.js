@@ -117,7 +117,7 @@ async function checkAIGuess() {
         case Difficulty.Easy:
             guessString = getGuessEasy().then((value) => { return value });
             break;
-        case Difficulty.Easy:
+        case Difficulty.Medium:
             guessString = getGuessMedium().then((value) => { return value });
             break;
         default:
@@ -181,13 +181,13 @@ async function getGuessEasy() {
 }
 
 async function getGuessMedium() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-medium');
+    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
 }
 
 async function getGuessHard() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-hard');
+    const aiGuess = await fetch('http://localhost:8889/py-data-hard-get');
     const aiGuessText = await aiGuess.text();
     return aiGuessText;
 }
