@@ -193,7 +193,7 @@ async function getGuessMedium() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            //patse through history, send with context
+            //parse through history, send with context. NEEDS UPDATE
             guess: aiGuessHistory
         })
     });

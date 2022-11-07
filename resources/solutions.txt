@@ -611,8 +611,6 @@ dryly
 duchy
 dully
 dummy
-dumpy
-dunce
 dusky
 dusty
 dutch
