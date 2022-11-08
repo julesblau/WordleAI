@@ -21,6 +21,7 @@ let currentGuess = [];
 let nextLetter = 0;
 let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = [];
+let aiGuessContext = [];
 
 console.log(rightGuessString)
 
@@ -115,6 +116,7 @@ function checkPlayerGuess() {
 async function checkAIGuess() {
 
     let guessString = null;
+    let contextString = null;
 
     switch (currDifficulty) {
         case Difficulty.Easy:
@@ -131,7 +133,7 @@ async function checkAIGuess() {
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
-    aiGuessHistory.push(currentGuess)
+    aiGuessHistory.push(guessString)
 
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -141,14 +143,18 @@ async function checkAIGuess() {
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         if (letterPosition === -1) {
             letterColor = 'grey'
+            contextString += "0"
         } else {
             if (currentGuess[i] === rightGuess[i]) {
                 letterColor = 'green'
+                contextString += "2"
             } else {
                 letterColor = 'yellow'
+                contextString += "1"
             }
 
             rightGuess[letterPosition] = "#"
+            aiGuessContext.push(contextString)
         }
 
         let delay = 250 * i
@@ -194,9 +200,8 @@ async function getGuessMedium() {
         },
         body: JSON.stringify({
             //parse through history, send with context. NEEDS UPDATE
-            guess: aiGuessHistory, //send a single word
-            context: [0,0,0,0,0]//array of context
-
+            guess: aiGuessHistory,
+            context: aiGuessContext
         })
     });
 
