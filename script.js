@@ -157,7 +157,6 @@ async function checkAIGuess() {
             }
 
             rightGuess[letterPosition] = "#"
-            aiGuessContext.push(contextString)
         }
 
         let delay = 250 * i
@@ -167,6 +166,8 @@ async function checkAIGuess() {
             box.classList.add("filled-box")
         }, delay)
     }
+
+    aiGuessContext.push(contextString)
 
     if (guessString === rightGuessString) {
         toastr.error("The AI guessed right! Game over!")
