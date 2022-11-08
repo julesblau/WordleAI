@@ -16,16 +16,15 @@ if __name__ == '__main__':
     # print(sys.argv[2])
 
     guessHistory = sys.argv[1].strip("[]").split(",")
-    # guessHistor??y?
-    print(guessHistory)
-    print(type(guessHistory))
+    # print(guessHistory)
+    # print(type(guessHistory))
 
 
     # Arg 1 is whole list of words
     # It ignores quotes but not brackets or commas
 
     guess = np.random.choice(_list)
-    # print(guess)
+    print(guess)
 
     sys.stdout.flush()
     #If we recieve gray, remove that letter from all positions in map

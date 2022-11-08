@@ -114,12 +114,8 @@ function checkPlayerGuess() {
 }
 
 async function checkAIGuess() {
-
     let guessString = "";
     let contextString = "";
-
-    console.log("Guess History: " + aiGuessHistory)
-    console.log("Guess Context: " + aiGuessContext)
 
     switch (currDifficulty) {
         case Difficulty.Easy:
@@ -133,11 +129,11 @@ async function checkAIGuess() {
     }
 
     guessString = await guessString;
+
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
     aiGuessHistory.push(guessString.slice(0, -1))
-
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
         let box = row.children[i]
@@ -203,14 +199,14 @@ async function getGuessMedium() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            //parse through history, send with context. NEEDS UPDATE
             guess: aiGuessHistory,
             context: aiGuessContext
         })
     });
 
-    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
+    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get'); //not returning on 6th
     const aiGuessText = await aiGuess.text();
+
     return aiGuessText;
 }
 
