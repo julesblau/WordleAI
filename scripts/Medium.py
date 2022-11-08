@@ -11,12 +11,15 @@ if __name__ == '__main__':
     _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str') 
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(1,6), list(string.ascii_lowercase))
-    print(type(sys.argv[1]))
+    # print(type(sys.argv[1]))
 
     # print(sys.argv[2])
 
-    guessHistory = sys.argv[1].strip("[]")
+    guessHistory = sys.argv[1].strip("[]").split(",")
+    # guessHistor??y?
     print(guessHistory)
+    print(type(guessHistory))
+
 
     # Arg 1 is whole list of words
     # It ignores quotes but not brackets or commas
