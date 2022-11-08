@@ -14,6 +14,12 @@ if __name__ == '__main__':
     # print(sys.argv[1])
     # print(sys.argv[2])
 
+    guessHistory = sys.argv[1].strip("[]")
+    print(guessHistory)
+
+    # Arg 1 is whole list of words
+    # It ignores quotes but not brackets or commas
+
     guess = np.random.choice(_list)
     print(guess)
 
