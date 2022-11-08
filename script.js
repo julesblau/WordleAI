@@ -115,8 +115,8 @@ function checkPlayerGuess() {
 
 async function checkAIGuess() {
 
-    let guessString = null;
-    let contextString = null;
+    let guessString = "";
+    let contextString = "";
 
     switch (currDifficulty) {
         case Difficulty.Easy:

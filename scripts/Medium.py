@@ -8,23 +8,24 @@ pathJake = "/Applications/MAMP/htdocs"
 
 if __name__ == '__main__':
     #Read in WordList
-    _list = np.loadtxt(pathJack + "/WordleAI/resources/solutions.txt", dtype='str') 
+    _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str') 
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(1,6), list(string.ascii_lowercase))
     print(sys.argv[1])
     print(sys.argv[2])
+    # print(sys.argv[3])
+
     sys.stdout.flush()
     #If we recieve gray, remove that letter from all positions in map
-    for i in range(len(context)):
-        if context[i] == '0':
-            del possible_letters[i+1]
-        # elif context == '1':
+    # for i in range(len(context)):
+    #     if context[i] == '0':
+    #         del possible_letters[i+1]
+    #     # elif context == '1':
             
-        else:
-            letters_in_solution.add(guess[i])
-            possible_letters[i+1] = guess[i]
+    #     else:
+    #         letters_in_solution.add(guess[i])
+    #         possible_letters[i+1] = guess[i]
 
-    print(sys.argv[1])
 
     #If we recieve yellow, remove that letter from that position in map
     #If we recieve green, remove all other letters from that position in map
