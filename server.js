@@ -34,7 +34,7 @@ app.get('/py-data-medium-get', (req, res) => {
 
 //Set endpoint to recieve data from Script for Python AI
 app.post('/py-data-medium-post',  (req, res) => {
-  guess =  req.body.guess;
+  guess = req.body.guess;
   context = req.body.context;
   console.log(guess)
   console.log(context)

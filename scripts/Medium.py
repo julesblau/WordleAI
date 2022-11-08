@@ -11,8 +11,12 @@ if __name__ == '__main__':
     _list = np.loadtxt(pathJack + "/WordleAI/resources/solutions.txt", dtype='str') 
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(1,6), list(string.ascii_lowercase))
-    print(sys.argv[1])
-    print(sys.argv[2])
+    # print(sys.argv[1])
+    # print(sys.argv[2])
+
+    guess = np.random.choice(_list)
+    print(guess)
+
     sys.stdout.flush()
     #If we recieve gray, remove that letter from all positions in map
     #If we recieve yellow, remove that letter from that position in map
