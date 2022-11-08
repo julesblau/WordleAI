@@ -36,6 +36,8 @@ app.get('/py-data-medium-get', (req, res) => {
 app.post('/py-data-medium-post',  (req, res) => {
   guess =  req.body.guess;
   context = req.body.context;
+  console.log(guess)
+  console.log(context)
   getGuessMedium(guess, context);
 })
 
