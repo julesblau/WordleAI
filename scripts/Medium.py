@@ -11,9 +11,24 @@ if __name__ == '__main__':
     _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str') 
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(1,6), list(string.ascii_lowercase))
-    # print(sys.argv[1])
-    sys.stdout.flush()
+    
+    #***NEED TO LOOK INTO ARGUMENTS. 'h','e','l','l','o' is sys.argv[1]***
+    guess = sys.argv[1]
+    context = sys.argv[2]
+    letters_in_solution = set()
+
     #If we recieve gray, remove that letter from all positions in map
+    for i in range(len(context)):
+        if context[i] == '0':
+            del possible_letters[i+1]
+        # elif context == '1':
+            
+        else:
+            letters_in_solution.add(guess[i])
+            possible_letters[i+1] = guess[i]
+
+    print(sys.argv[1])
+
     #If we recieve yellow, remove that letter from that position in map
     #If we recieve green, remove all other letters from that position in map
 
@@ -22,6 +37,11 @@ if __name__ == '__main__':
     #CASE TO CONSIDER:
     #Guess is "guess" and one 's' is yellow and one is gray
     #Solution: Remove from those positions, leave in the other positions
+
+
+    # print(sys.argv[1]) argv 1 is word. argv 2 is 0,1,2 context
+    sys.stdout.flush()
+
 
     
     

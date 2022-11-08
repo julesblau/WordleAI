@@ -33,14 +33,15 @@ app.get('/py-data-medium-get', (req, res) => {
 
 //Set endpoint to recieve data from Script for Python AI
 app.post('/py-data-medium-post',  (req, res) => {
-  context =  req.body.guess; //could do two json strings, one is letter other is result
-  getGuessMedium(context);
+  guess =  req.body.guess; //could do two json strings, one is letter other is result
+  context = req.body.context;
+  getGuessMedium(guess, context);
 })
 
 //Get Medium Guess
-function getGuessMedium(context) {
+function getGuessMedium(guess, context) {
   const spawn = require('child_process').spawn;
-  const ls = spawn('python', ['scripts/Medium.py', context.toString()]); //call the function with an argument(s)
+  const ls = spawn('python', ['scripts/Medium.py', guess.toString(), context.toString()]); //call the function with an argument(s)
   ls.stdout.on('data', (data) => {
     aiGuess = data + '';
   });

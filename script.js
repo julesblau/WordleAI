@@ -194,13 +194,14 @@ async function getGuessMedium() {
         },
         body: JSON.stringify({
             //parse through history, send with context. NEEDS UPDATE
-            guess: aiGuessHistory
+            guess: aiGuessHistory, //send a single word
+            context: [0,0,0,0,0]//array of context
+
         })
     });
 
     const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
     const aiGuessText = await aiGuess.text();
-    console.log(aiGuessText)
     return aiGuessText;
 }
 
