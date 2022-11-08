@@ -118,6 +118,9 @@ async function checkAIGuess() {
     let guessString = "";
     let contextString = "";
 
+    console.log("Guess History: " + aiGuessHistory)
+    console.log("Guess Context: " + aiGuessContext)
+
     switch (currDifficulty) {
         case Difficulty.Easy:
             guessString = getGuessEasy().then((value) => { return value });
@@ -133,7 +136,7 @@ async function checkAIGuess() {
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(rightGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
-    aiGuessHistory.push(guessString)
+    aiGuessHistory.push(guessString.slice(0, -1))
 
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
