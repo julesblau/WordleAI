@@ -19,11 +19,11 @@ const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
-let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
+let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = [];
 let aiGuessContext = [];
 
-console.log(rightGuessString)
+console.log(correctGuessString)
 
 function toggleDarkMode() {
     var element = document.body;
@@ -59,7 +59,7 @@ function turn() {
 function checkPlayerGuess() {
     let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let guessString = ''
-    let rightGuess = Array.from(rightGuessString)
+    let rightGuess = Array.from(correctGuessString)
 
     for (const val of currentGuess) {
         guessString += val
@@ -101,7 +101,7 @@ function checkPlayerGuess() {
         }, delay)
     }
 
-    if (guessString === rightGuessString) {
+    if (guessString === correctGuessString) {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard();
@@ -132,9 +132,9 @@ async function checkAIGuess() {
             guessString = getGuessHard().then((value) => { return value });
     }
 
-    guessString = await guessString;
+    guessString = await guessString
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
-    let rightGuess = Array.from(rightGuessString)
+    let rightGuess = Array.from(correctGuessString)
     currentGuess = Array.from(guessString).slice(0, -1)
     aiGuessHistory.push(guessString.slice(0, -1))
 
@@ -169,20 +169,22 @@ async function checkAIGuess() {
 
     aiGuessContext.push(contextString)
 
-    if (guessString == rightGuessString) {
+    guessString = await guessString
+    if (guessString == correctGuessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
         return
     } else {
         guessesRemaining -= 1
+        console.log("Went into else")
         currentGuess = []
         nextLetter = 0
 
         if (guessesRemaining == 0) {
             fillAiBoard()
             toastr.info("Neither player got it! It's a draw!")
-            toastr.info(`The right word was: "${rightGuessString}"`)
+            toastr.info(`The right word was: "${correctGuessString}"`)
         }
     }
 }
@@ -283,7 +285,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    if (pressedKey === "Enter") {
+    if (pressedKey === "Enter" && guessesRemaining != 0) {
         turn()
         return
     }

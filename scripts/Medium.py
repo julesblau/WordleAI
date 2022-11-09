@@ -38,7 +38,7 @@ if __name__ == '__main__':
                     grays.remove(currLetter)
 
             # If we recieve 0, add letter to gray list if not there
-            elif (context[i])[j] == '0' and currLetter not in grays:
+            elif (context[i])[j] == '0' and currLetter not in grays and currLetter not in yellows and currLetter not in greens:
                 grays.append(currLetter)
 
     possibleGuesses = wordList.copy()
