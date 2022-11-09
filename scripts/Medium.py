@@ -2,16 +2,12 @@ import numpy as np
 import sys
 import string
 
-pathJack = "/Users/jmayrides/git"
-pathJules = "/Users/julesblau/Desktop"
-pathJake = "/Applications/MAMP/htdocs"
-
 if __name__ == '__main__':
-    # Read in WordList
 
+    # Read in WordList
     my_file = open("resources/solutions.txt", "r")
     data = my_file.read()
-    possibleGuesses = data.split("\n")
+    wordList = data.split("\n")
     my_file.close()
 
     # Create lists to hold context of letters
@@ -48,7 +44,6 @@ if __name__ == '__main__':
 
     # # Remove all previous guesses from guess list
     # for prevGuess in guessHistory:
-    #     # print("removed: " + prevGuess)
     #     possibleGuesses.remove(prevGuess)
 
     # If word in guess list doesn't have green letter in correct position, remove word from guess list
@@ -56,7 +51,6 @@ if __name__ == '__main__':
         for i in range(5):
             if greens[i] != None:
                 if greens[i] != word[i]:
-                    print("green removed: " + word)
                     possibleGuesses.remove(word)
                     break
 
@@ -66,7 +60,6 @@ if __name__ == '__main__':
     for word in wordList:
         for letter in yellows:
             if letter not in word:
-                print("yellow removed: " + word)
                 possibleGuesses.remove(word)
                 break
     
@@ -76,12 +69,10 @@ if __name__ == '__main__':
     for word in wordList:
         for letter in grays:
             if letter in word:
-                print("gray removed: " + word)
                 possibleGuesses.remove(word)
                 break
 
-    print(*possibleGuesses, sep=', ')
 
     # Choose random word from remaining (valid) words
     guess = np.random.choice(possibleGuesses)
-    print("Final Guess: " + guess)
+    sys.stdout.flush()
