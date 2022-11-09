@@ -115,28 +115,32 @@ function checkPlayerGuess() {
 
 async function checkAIGuess() {
 
-    let guessString = "";
-    let contextString = "";
-
     console.log("Guess History: " + aiGuessHistory)
     console.log("Guess Context: " + aiGuessContext)
 
     switch (currDifficulty) {
         case Difficulty.Easy:
-            guessString = getGuessEasy().then((value) => { return value });
+            await getGuessEasy().then((value) => { checkAiLogic(value) });
             break;
         case Difficulty.Medium:
-            guessString = getGuessMedium().then((value) => { return value });
+            await getGuessMedium().then((value) => { checkAiLogic(value) });
             break;
         default:
-            guessString = getGuessHard().then((value) => { return value });
+            await getGuessHard().then((value) => { checkAiLogic(value) });
+            break;
     }
 
-    guessString = await guessString
+}
+
+function checkAiLogic(guessString) {
+
+    let contextString = "";
+    guessString = guessString.slice(0, -1)
+
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
     let rightGuess = Array.from(correctGuessString)
-    currentGuess = Array.from(guessString).slice(0, -1)
-    aiGuessHistory.push(guessString.slice(0, -1))
+    currentGuess = Array.from(guessString)
+    aiGuessHistory.push(guessString)
 
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
@@ -169,7 +173,6 @@ async function checkAIGuess() {
 
     aiGuessContext.push(contextString)
 
-    guessString = await guessString
     if (guessString == correctGuessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
@@ -177,7 +180,6 @@ async function checkAIGuess() {
         return
     } else {
         guessesRemaining -= 1
-        console.log("Went into else")
         currentGuess = []
         nextLetter = 0
 
@@ -187,6 +189,7 @@ async function checkAIGuess() {
             toastr.info(`The right word was: "${correctGuessString}"`)
         }
     }
+
 }
 
 async function getGuessEasy() {
