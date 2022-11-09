@@ -2,13 +2,12 @@ import numpy as np
 import sys
 import string
 
-pathJack = "/Users/jmayrides/git"
-pathJules = "/Users/julesblau/Desktop"
-pathJake = "/Applications/MAMP/htdocs"
 
 if __name__ == '__main__':
     #Read in WordList
-    _list = np.loadtxt(pathJack + "/WordleAI/resources/solutions.txt", dtype='str') 
+    my_file = open("resources/solutions.txt", "r")
+    wordList = my_file.read().split("\n")
+    my_file.close()
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(5), list(string.ascii_lowercase))
     greens = [None, None, None, None, None]
@@ -53,7 +52,7 @@ if __name__ == '__main__':
     #Solution: Remove from those positions, leave in the other positions
 
 
-    guess = np.random.choice(_list)
+    guess = np.random.choice(wordList)
     print(guess)
 
     # print(sys.argv[1]) argv 1 is word. argv 2 is 0,1,2 context

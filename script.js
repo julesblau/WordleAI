@@ -169,7 +169,7 @@ async function checkAIGuess() {
 
     aiGuessContext.push(contextString)
 
-    if (guessString === rightGuessString) {
+    if (guessString == rightGuessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
@@ -179,7 +179,7 @@ async function checkAIGuess() {
         currentGuess = []
         nextLetter = 0
 
-        if (guessesRemaining === 0) {
+        if (guessesRemaining == 0) {
             fillAiBoard()
             toastr.info("Neither player got it! It's a draw!")
             toastr.info(`The right word was: "${rightGuessString}"`)
@@ -194,7 +194,6 @@ async function getGuessEasy() {
 }
 
 async function getGuessMedium() {
-    //i think sending nothing at first is what may mess up the get request
     if(guessesRemaining != 6) {
         fetch('http://localhost:8889/py-data-medium-post', 
         {   
