@@ -10,68 +10,65 @@ if __name__ == '__main__':
     #Read in WordList
     _list = np.loadtxt(pathJack + "/WordleAI/resources/solutions.txt", dtype='str').tolist()
     
-    # Create Map to store possible letters
-    possible_letters = dict.fromkeys(range(5), list(string.ascii_lowercase))
+    # Create lists to hold context of letters
     greens = [None, None, None, None, None]
     yellows = []
     grays = []
 
+    # Get guess history and context from system args
     guessHistory = sys.argv[1].strip("[]").split(",")
     context = sys.argv[2].strip("[]").split(",")
 
-    for i in range(len(context)):
-        for j in range(5):
-            currLetter = guessHistory[i][j]
+    if not guessHistory:
 
-            #If we recieve gray, remove that letter from all positions in map
-            if context[i][j] == '0':
-                grays.append(currLetter)
+        # # For each letter in each word
+        # for i in range(len(context)):
+        #     for j in range(5):
+        #         currWord = (guessHistory[i])
+        #         currLetter = currWord[j]
 
-            #If we recieve yellow, remove that postion from that letter in map
-            elif context[i][j] == '1':
-                yellows.append(currLetter)
+        #         #If we recieve 0, add letter to gray list
+        #         if (context[i])[j] == '0':
+        #             grays.append(currLetter)
 
-            #If we recieve green, remove all other letters from that position in map    
-            else:
-                greens[j] = currLetter
-    
-    # Receive information as letter --> 0,1,2 (gray, yellow, green) or two arrays matching [row,col]
+        #         #If we recieve 1, add letter to yellow list
+        #         elif (context[i])[j] == '1':
+        #             yellows.append(currLetter)
 
-    #CASE TO CONSIDER:
-    #Guess is "guess" and one 's' is yellow and one is gray
-    #Solution: Remove from those positions, leave in the other positions
+        #         #If we recieve 2, add letter to green list in correct position 
+        #         else:
+        #             greens[j] = currLetter
 
-    for prevGuess in guessHistory:
-        _list.remove(prevGuess)
+        # # Remove all previous guesses from guess list
+        # # for prevGuess in guessHistory:
+        # #     _list.remove(prevGuess)
 
-    for word in _list:
-        removeWord = False
-        for i in range(5):
-            if greens[i] != None:
-                if greens[i] != word[i]:
-                    removeWord = True
-        if removeWord:
-            _list.remove(word)
+        # # If word in guess list doesn't have green letter in correct position, remove word from guess list
+        # for word in _list:
+        #     removeWord = False
+        #     for i in range(5):
+        #         if greens[i] != None:
+        #             if greens[i] != word[i]:
+        #                 removeWord = True
+        #     if removeWord:
+        #         _list.remove(word)
 
-    for word in _list:
-        for letter in yellows:
-            if letter not in word:
-                _list.remove(word)
-            
+        # # If word in guess list doesn't have yellow letter in word, remove word from guess list
+        # for word in _list:
+        #     for letter in yellows:
+        #         if letter not in word:
+        #             _list.remove(word)
+                
+        # # If word in guess list has gray letter in word, remove word from guess list
+        # for word in _list:
+        #     for letter in grays:
+        #         if letter in word:
+        #             _list.remove(word)
+        _list = ['booty']
 
-    for word in _list:
-        for letter in grays:
-            if letter in word:
-                _list.remove(word)
-            
 
-
+    # Choose random word from remaining (valid) words
     guess = np.random.choice(_list)
     print(guess)
 
-    # print(sys.argv[1]) argv 1 is word. argv 2 is 0,1,2 context
     sys.stdout.flush()
-
-
-    
-    
