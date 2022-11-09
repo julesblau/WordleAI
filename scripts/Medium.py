@@ -8,8 +8,11 @@ pathJake = "/Applications/MAMP/htdocs"
 
 if __name__ == '__main__':
     # Read in WordList
-    _list = np.loadtxt(
-        pathJack + "/WordleAI/resources/solutions.txt", dtype='str').tolist()
+
+    my_file = open("resources/solutions.txt", "r")
+    data = my_file.read()
+    possibleGuesses = data.split("\n")
+    my_file.close()
 
     # Create lists to hold context of letters
     greens = [None, None, None, None, None]
@@ -23,15 +26,14 @@ if __name__ == '__main__':
     # For each letter in each word
     for i in range(len(context)):
         for j in range(5):
-            currWord = (guessHistory[i])
-            currLetter = currWord[j]
+            currLetter = (guessHistory[i])[j]
 
             # If we recieve 0, add letter to gray list
-            if (context[i])[j] == '0':
+            if (context[i])[j] == '0' and currLetter not in grays:
                 grays.append(currLetter)
 
             # If we recieve 1, add letter to yellow list
-            elif (context[i])[j] == '1':
+            elif (context[i])[j] == '1' and currLetter not in yellows:
                 yellows.append(currLetter)
 
             # If we recieve 2, add letter to green list in correct position
@@ -43,33 +45,33 @@ if __name__ == '__main__':
             grays.remove(letter)
 
     # Remove all previous guesses from guess list
-    # for prevGuess in guessHistory:
-    #     _list.remove(prevGuess)
+    for prevGuess in guessHistory:
+        possibleGuesses.remove(prevGuess)
 
     # If word in guess list doesn't have green letter in correct position, remove word from guess list
-    for word in _list:
-        removeWord = False
+    for word in possibleGuesses:
         for i in range(5):
             if greens[i] != None:
                 if greens[i] != word[i]:
-                    removeWord = True
-        if removeWord:
-            _list.remove(word)
+                    possibleGuesses.remove(word)
+                    break
 
     # If word in guess list doesn't have yellow letter in word, remove word from guess list
-    for word in _list:
+    for word in possibleGuesses:
         for letter in yellows:
             if letter not in word:
-                _list.remove(word)
+                possibleGuesses.remove(word)
+                break
 
     # If word in guess list has gray letter in word, remove word from guess list
-    for word in _list:
+    for word in possibleGuesses:
         for letter in grays:
             if letter in word:
-                _list.remove(word)
+                possibleGuesses.remove(word)
+                break
 
     # Choose random word from remaining (valid) words
-    guess = np.random.choice(_list)
+    guess = np.random.choice(possibleGuesses)
     print(guess)
 
     sys.stdout.flush()
