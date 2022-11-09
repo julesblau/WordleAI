@@ -195,23 +195,31 @@ async function getGuessEasy() {
 
 async function getGuessMedium() {
     //i think sending nothing at first is what may mess up the get request
-    fetch('http://localhost:8889/py-data-medium-post', 
-    {   
-        method: 'POST',
-        headers:
-        {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            //parse through history, send with context. NEEDS UPDATE
-            guess: aiGuessHistory,
-            context: aiGuessContext
-        })
-    });
+    if(guessesRemaining != 6) {
+        fetch('http://localhost:8889/py-data-medium-post', 
+        {   
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                //parse through history, send with context. NEEDS UPDATE
+                guess: aiGuessHistory,
+                context: aiGuessContext
+            })
+        });
 
-    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
-    const aiGuessText = await aiGuess.text();
-    return aiGuessText;
+        const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
+        const aiGuessText = await aiGuess.text();
+        return aiGuessText; 
+    }
+
+    else {
+
+        return getGuessEasy();
+
+    } 
 }
 
 async function getGuessHard() {
