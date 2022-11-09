@@ -20,8 +20,8 @@ if __name__ == '__main__':
     grays = []
 
     # Get guess history and context from system args
-    guessHistory = ['diner']
-    context = ['12000']
+    guessHistory = sys.argv[1].strip("[]").split(",")
+    context = sys.argv[2].strip("[]").split(",")
 
     # For each letter in each word
     for i in range(len(context)):
