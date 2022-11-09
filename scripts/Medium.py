@@ -8,7 +8,7 @@ pathJake = "/Applications/MAMP/htdocs"
 
 if __name__ == '__main__':
     #Read in WordList
-    _list = np.loadtxt(pathJack + "/WordleAI/resources/solutions.txt", dtype='str').tolist()
+    _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str').tolist()
     
     # Create Map to store possible letters
     possible_letters = dict.fromkeys(range(5), list(string.ascii_lowercase))
@@ -17,12 +17,7 @@ if __name__ == '__main__':
     grays = []
 
     guessHistory = sys.argv[1].strip("[]").split(",")
-<<<<<<< HEAD
-    # print(guessHistory)
-    # print(type(guessHistory))
-=======
     context = sys.argv[2].strip("[]").split(",")
->>>>>>> aecb8615cc298c4e889867a0342ad74db9340f9b
 
     for i in range(len(context)):
         for j in range(5):
@@ -32,29 +27,9 @@ if __name__ == '__main__':
             if context[i][j] == '0':
                 grays.append(currLetter)
 
-<<<<<<< HEAD
-    guess = np.random.choice(_list)
-    print(guess)
-
-    sys.stdout.flush()
-    #If we recieve gray, remove that letter from all positions in map
-    # for i in range(len(context)):
-    #     if context[i] == '0':
-    #         del possible_letters[i+1]
-    #     # elif context == '1':
-            
-    #     else:
-    #         letters_in_solution.add(guess[i])
-    #         possible_letters[i+1] = guess[i]
-
-
-    #If we recieve yellow, remove that letter from that position in map
-    #If we recieve green, remove all other letters from that position in map
-=======
             #If we recieve yellow, remove that postion from that letter in map
             elif context[i][j] == '1':
                 yellows.append(currLetter)
->>>>>>> aecb8615cc298c4e889867a0342ad74db9340f9b
 
             #If we recieve green, remove all other letters from that position in map    
             else:
@@ -65,9 +40,6 @@ if __name__ == '__main__':
     #CASE TO CONSIDER:
     #Guess is "guess" and one 's' is yellow and one is gray
     #Solution: Remove from those positions, leave in the other positions
-
-    for prevGuess in guessHistory:
-        _list.remove(prevGuess)
 
     for word in _list:
         removeWord = False
@@ -93,6 +65,10 @@ if __name__ == '__main__':
 
     guess = np.random.choice(_list)
     print(guess)
+
+    # for prevGuess in guessHistory:
+    #     print(prevGuess)
+    #     _list.remove(prevGuess)
 
     # print(sys.argv[1]) argv 1 is word. argv 2 is 0,1,2 context
     sys.stdout.flush()

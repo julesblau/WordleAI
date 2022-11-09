@@ -206,7 +206,7 @@ async function getGuessMedium() {
 
     const aiGuess = await fetch('http://localhost:8889/py-data-medium-get'); //not returning on 6th
     const aiGuessText = await aiGuess.text();
-
+    console.log(aiGuessText)
     return aiGuessText;
 }
 
