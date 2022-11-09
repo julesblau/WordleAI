@@ -19,11 +19,11 @@ const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
 let nextLetter = 0;
-let rightGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
+let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = [];
 let aiGuessContext = [];
 
-console.log(rightGuessString)
+console.log(correctGuessString)
 
 function toggleDarkMode() {
     var element = document.body;
@@ -59,7 +59,7 @@ function turn() {
 function checkPlayerGuess() {
     let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let guessString = ''
-    let rightGuess = Array.from(rightGuessString)
+    let rightGuess = Array.from(correctGuessString)
 
     for (const val of currentGuess) {
         guessString += val
@@ -101,7 +101,7 @@ function checkPlayerGuess() {
         }, delay)
     }
 
-    if (guessString === rightGuessString) {
+    if (guessString === correctGuessString) {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard();
@@ -114,26 +114,34 @@ function checkPlayerGuess() {
 }
 
 async function checkAIGuess() {
-    let guessString = "";
-    let contextString = "";
+
+    console.log("Guess History: " + aiGuessHistory)
+    console.log("Guess Context: " + aiGuessContext)
 
     switch (currDifficulty) {
         case Difficulty.Easy:
-            guessString = getGuessEasy().then((value) => { return value });
+            await getGuessEasy().then((value) => { checkAiLogic(value) });
             break;
         case Difficulty.Medium:
-            guessString = getGuessMedium().then((value) => { return value });
+            await getGuessMedium().then((value) => { checkAiLogic(value) });
             break;
         default:
-            guessString = getGuessHard().then((value) => { return value });
+            await getGuessHard().then((value) => { checkAiLogic(value) });
+            break;
     }
 
-    guessString = await guessString;
+}
+
+function checkAiLogic(guessString) {
+
+    let contextString = "";
+    guessString = guessString.slice(0, -1)
 
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
-    let rightGuess = Array.from(rightGuessString)
-    currentGuess = Array.from(guessString).slice(0, -1)
-    aiGuessHistory.push(guessString.slice(0, -1))
+    let rightGuess = Array.from(correctGuessString)
+    currentGuess = Array.from(guessString)
+    aiGuessHistory.push(guessString)
+
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
         let box = row.children[i]
@@ -165,7 +173,7 @@ async function checkAIGuess() {
 
     aiGuessContext.push(contextString)
 
-    if (guessString === rightGuessString) {
+    if (guessString == correctGuessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
@@ -175,12 +183,13 @@ async function checkAIGuess() {
         currentGuess = []
         nextLetter = 0
 
-        if (guessesRemaining === 0) {
+        if (guessesRemaining == 0) {
             fillAiBoard()
             toastr.info("Neither player got it! It's a draw!")
-            toastr.info(`The right word was: "${rightGuessString}"`)
+            toastr.info(`The right word was: "${correctGuessString}"`)
         }
     }
+
 }
 
 async function getGuessEasy() {
@@ -190,24 +199,31 @@ async function getGuessEasy() {
 }
 
 async function getGuessMedium() {
-    //i think sending nothing at first is what may mess up the get request
-    fetch('http://localhost:8889/py-data-medium-post', 
-    {   
-        method: 'POST',
-        headers:
-        {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            guess: aiGuessHistory,
-            context: aiGuessContext
-        })
-    });
+    if(guessesRemaining != 6) {
+        fetch('http://localhost:8889/py-data-medium-post', 
+        {   
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                //parse through history, send with context. NEEDS UPDATE
+                guess: aiGuessHistory,
+                context: aiGuessContext
+            })
+        });
 
-    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get'); //not returning on 6th
-    const aiGuessText = await aiGuess.text();
-    console.log(aiGuessText)
-    return aiGuessText;
+        const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
+        const aiGuessText = await aiGuess.text();
+        return aiGuessText; 
+    }
+
+    else {
+
+        return getGuessEasy();
+
+    } 
 }
 
 async function getGuessHard() {
@@ -272,7 +288,7 @@ document.addEventListener("keyup", (e) => {
         return
     }
 
-    if (pressedKey === "Enter") {
+    if (pressedKey === "Enter" && guessesRemaining != 0) {
         turn()
         return
     }

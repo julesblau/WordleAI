@@ -2,34 +2,40 @@ import numpy as np
 import sys
 import string
 
-pathJack = "/Users/jmayrides/git"
-pathJules = "/Users/julesblau/Desktop"
-pathJake = "/Applications/MAMP/htdocs"
-
 if __name__ == '__main__':
-    #Read in WordList
-    _list = np.loadtxt(pathJules + "/WordleAI/resources/solutions.txt", dtype='str').tolist()
-    
-    # Create Map to store possible letters
-    possible_letters = dict.fromkeys(range(5), list(string.ascii_lowercase))
+
+    # Read in WordList
+    my_file = open("resources/solutions.txt", "r")
+    wordList = my_file.read().split("\n")
+    my_file.close()
+
+    # Create lists to hold context of letters
     greens = [None, None, None, None, None]
     yellows = []
     grays = []
 
+    # Get guess history and context from system args
     guessHistory = sys.argv[1].strip("[]").split(",")
     context = sys.argv[2].strip("[]").split(",")
 
+        # For each letter in each word
     for i in range(len(context)):
         for j in range(5):
-            currLetter = guessHistory[i][j]
+            currLetter = (guessHistory[i])[j]
 
-            #If we recieve gray, remove that letter from all positions in map
-            if context[i][j] == '0':
-                grays.append(currLetter)
+            # If we recieve 2, add letter to green list in correct position
+            if (context[i])[j] == '2':
+                greens[j] = currLetter
+                if currLetter in yellows:
+                    yellows.remove(currLetter)
+                if currLetter in grays:
+                    grays.remove(currLetter)
 
-            #If we recieve yellow, remove that postion from that letter in map
-            elif context[i][j] == '1':
+            # If we recieve 1, add letter to yellow list if not there
+            elif (context[i])[j] == '1' and currLetter not in yellows and currLetter not in greens:
                 yellows.append(currLetter)
+                if currLetter in grays:
+                    grays.remove(currLetter)
 
             #If we recieve green, remove all other letters from that position in map    
             else:
@@ -41,38 +47,38 @@ if __name__ == '__main__':
     #Guess is "guess" and one 's' is yellow and one is gray
     #Solution: Remove from those positions, leave in the other positions
 
+    for prevGuess in guessHistory:
+        _list.remove(prevGuess)
+
     for word in _list:
         removeWord = False
         for i in range(5):
             if greens[i] != None:
                 if greens[i] != word[i]:
-                    removeWord = True
-        if removeWord:
-            _list.remove(word)
+                    possibleGuesses.remove(word)
+                    break
 
-    for word in _list:
+    wordList = possibleGuesses.copy()
+
+    # If word in guess list doesn't have yellow letter in word, remove word from guess list
+    for word in wordList:
         for letter in yellows:
             if letter not in word:
-                _list.remove(word)
-            
+                possibleGuesses.remove(word)
+                break
+    
+    wordList = possibleGuesses.copy()
 
-    for word in _list:
+    # If word in guess list has gray letter in word, remove word from guess list
+    for word in wordList:
         for letter in grays:
             if letter in word:
-                _list.remove(word)
-            
+                possibleGuesses.remove(word)
+                break
 
-
-    guess = np.random.choice(_list)
+    # Choose random word from remaining (valid) words
+    guess = np.random.choice(possibleGuesses)
     print(guess)
-
-    # for prevGuess in guessHistory:
-    #     print(prevGuess)
-    #     _list.remove(prevGuess)
 
     # print(sys.argv[1]) argv 1 is word. argv 2 is 0,1,2 context
     sys.stdout.flush()
-
-
-    
-    
