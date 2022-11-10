@@ -16,7 +16,6 @@
 
 <body style="text-align: center;">
   <h1> Wordle AI </h1>
-<<<<<<< Updated upstream
   <div class = "dropdown">
     <button class="dropbtn">Head to Head</button>
     <div class="dropdown-content">
@@ -25,25 +24,6 @@
       <a href = "headtohead.html?difficulty=hard">Hard</a>
     </div>
   </div>
-=======
-  <button class="button" onclick=addDiffParam()>Head to Head</button>
-  <label for="difficulties">Difficulty:</label>
-  <select name="difficulties" id="difficulties">
-    <option value="easy" selected>Easy</option>
-    <option value="medium">Medium</option>
-    <option value="hard">Hard</option>
-  </select>
-
-  <script>
-    function addDiffParam() {
-      var url = "headtohead.html";
-      let select = document.getElementById("difficulties")
-      let currDifficulty = select.options[select.selectedIndex].value;
-      url += '?difficulty=' + currDifficulty;
-      window.open(url,'_self');
-    }
-  </script>
->>>>>>> Stashed changes
 
   <button class="button">Wordle++</button>
   <button class="button">Solver</button>
