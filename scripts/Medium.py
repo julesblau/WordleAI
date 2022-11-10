@@ -18,7 +18,7 @@ if __name__ == '__main__':
     guessHistory = sys.argv[1].strip("[]").split(",")
     context = sys.argv[2].strip("[]").split(",")
 
-    # For each letter in each word
+        # For each letter in each word
     for i in range(len(context)):
         for j in range(5):
             currLetter = (guessHistory[i])[j]
@@ -37,21 +37,14 @@ if __name__ == '__main__':
                 if currLetter in grays:
                     grays.remove(currLetter)
 
-            #If we recieve green, remove all other letters from that position in map    
-            else:
-                greens[j] = currLetter
-    
-    # Receive information as letter --> 0,1,2 (gray, yellow, green) or two arrays matching [row,col]
+            # If we recieve 0, add letter to gray list if not there
+            elif (context[i])[j] == '0' and currLetter not in grays and currLetter not in yellows and currLetter not in greens:
+                grays.append(currLetter)
 
-    #CASE TO CONSIDER:
-    #Guess is "guess" and one 's' is yellow and one is gray
-    #Solution: Remove from those positions, leave in the other positions
+    possibleGuesses = wordList.copy()
 
-    for prevGuess in guessHistory:
-        _list.remove(prevGuess)
-
-    for word in _list:
-        removeWord = False
+    # If word in guess list doesn't have green letter in correct position, remove word from guess list
+    for word in wordList:
         for i in range(5):
             if greens[i] != None:
                 if greens[i] != word[i]:
@@ -79,6 +72,4 @@ if __name__ == '__main__':
     # Choose random word from remaining (valid) words
     guess = np.random.choice(possibleGuesses)
     print(guess)
-
-    # print(sys.argv[1]) argv 1 is word. argv 2 is 0,1,2 context
     sys.stdout.flush()
