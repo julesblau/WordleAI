@@ -203,40 +203,35 @@ async function postGuessMedium() {
 
     var _continue = false
 
-    if (guessesRemaining != 6) {
-        fetch('http://localhost:8889/py-data-medium-post',
+    fetch('http://localhost:8889/py-data-medium-post',
+        {
+            method: 'POST',
+            headers:
             {
-                method: 'POST',
-                headers:
-                {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    guess: aiGuessHistory,
-                    context: aiGuessContext
-                })
-            }).then(response => {
-
-                // console.log(response.status)
-
-                // if (response.status == 200) {
-
-                //     _continue = true
-
-                // }
-
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                guess: aiGuessHistory,
+                context: aiGuessContext
             })
+        }).then(response => {
 
-        // console.log(_continue)
+            // console.log(response.status)
 
-        // if (_continue) {
+            // if (response.status == 200) {
+
+            //     _continue = true
+
+            // }
+
+        })
+
+    // console.log(_continue)
+
+    // if (_continue) {
 
 
-        // }
-
-    } else {
-        return getGuessEasy()
-    }
+    // }
 }
 
 async function getGuessMedium() {
@@ -298,6 +293,7 @@ const animateCSS = (element, animation, prefix = 'animate__') =>
         node.addEventListener('animationend', handleAnimationEnd, { once: true });
     })
 
+// Event listener for physical keyboard
 document.addEventListener("keyup", (e) => {
 
     if (guessesRemaining === 0) {
