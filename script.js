@@ -201,21 +201,6 @@ async function postGuessMedium() {
     if (guessesRemaining != 6) {
         fetch('http://localhost:8889/py-data-medium-post',
             {
-<<<<<<< HEAD
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                //parse through history, send with context. NEEDS UPDATE
-                guess: aiGuessHistory,
-                context: aiGuessContext
-            })
-        });
-        
-        const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
-        const aiGuessText = await aiGuess.text();
-        return aiGuessText; 
-    }
-=======
                 method: 'POST',
                 headers:
                 {
@@ -228,7 +213,6 @@ async function postGuessMedium() {
             }).then( response => {
 
                 // console.log(response.status)
->>>>>>> a691e284ca3571aa9766efcf600a2468b2723ce0
 
                 // if (response.status == 200) {
 
