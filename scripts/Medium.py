@@ -18,7 +18,7 @@ if __name__ == '__main__':
     guessHistory = sys.argv[1].strip("[]").split(",")
     context = sys.argv[2].strip("[]").split(",")
 
-        # For each letter in each word
+    # For each letter in each word
     for i in range(len(context)):
         for j in range(5):
             currLetter = (guessHistory[i])[j]

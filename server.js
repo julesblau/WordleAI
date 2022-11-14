@@ -18,7 +18,7 @@ app.get('/py-data-easy', (req, res) => {
 //Get Easy Guess
 function getGuessEasy() {
   const spawn = require('child_process').spawn;
-  const ls = spawn('python', ['scripts/Easy.py']);
+  const ls = spawn('python3', ['scripts/Easy.py']);
   ls.stdout.on('data', (data) => {
     aiGuess = data + '';
   });
@@ -29,6 +29,7 @@ function getGuessEasy() {
 
 //Set endpoint for sending python MEDIUM MODE data. Collect Ensuing Guesses
 app.get('/py-data-medium-get', (req, res) => {
+  getGuessMedium(guess, context);
   res.send(aiGuess);
 })
 
@@ -36,13 +37,19 @@ app.get('/py-data-medium-get', (req, res) => {
 app.post('/py-data-medium-post',  (req, res) => {
   guess = req.body.guess;
   context = req.body.context;
+<<<<<<< HEAD
   getGuessMedium(guess, context);
+=======
+  console.log("Server Guess History: " + guess);
+  console.log("Server Context: " + context);
+  res.sendStatus(200);
+>>>>>>> a691e284ca3571aa9766efcf600a2468b2723ce0
 })
 
 //Get Medium Guess
 function getGuessMedium(guess, context) {
   const spawn = require('child_process').spawn;
-  const ls = spawn('python', ['scripts/Medium.py', guess, context]); //call the function with an argument(s)
+  const ls = spawn('python3', ['scripts/Medium.py', guess, context]); //call the function with an argument(s)
   ls.stdout.on('data', (data) => {
     aiGuess = data + '';
   });
