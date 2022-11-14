@@ -213,7 +213,7 @@ async function getGuessMedium() {
                 context: aiGuessContext
             })
         });
-
+        
         const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
         const aiGuessText = await aiGuess.text();
         return aiGuessText; 
