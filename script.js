@@ -10,11 +10,12 @@ const Difficulty = {
     Hard: "hard",
 }
 
-let currDifficulty = Difficulty.Easy //default to easy
+let currDifficulty = Difficulty.Easy // Default to easy
 const params = new URLSearchParams(document.location.search);
 const diffParam = params.get("difficulty");
 currDifficulty = diffParam
 
+// Initialize all global variables
 const NUMBER_OF_GUESSES = 6;
 let guessesRemaining = NUMBER_OF_GUESSES;
 let currentGuess = [];
@@ -24,11 +25,6 @@ let aiGuessHistory = [];
 let aiGuessContext = [];
 
 console.log(correctGuessString)
-
-function toggleDarkMode() {
-    var element = document.body;
-    element.classList.toggle("dark-mode");
-}
 
 function initBoard(boardName) {
     let board = document.getElementById(boardName);
