@@ -1,8 +1,8 @@
 // Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
 // https://github.com/Morgenstern2573/wordle_clone/blob/master/build/script.js
 
-import { SOLUTIONS } from "./resources/solutions.js";
-import { GUESSES } from "./resources/valid_guesses.js";
+import { SOLUTIONS } from "./resources/solutions.js"
+import { GUESSES } from "./resources/valid_guesses.js"
 
 const Difficulty = {
     Easy: "easy",
@@ -10,30 +10,30 @@ const Difficulty = {
     Hard: "hard",
 }
 
-let currDifficulty = Difficulty.Easy // Default to easy
-const params = new URLSearchParams(document.location.search);
-const diffParam = params.get("difficulty");
+let currDifficulty = Difficulty.Easy // Default to easy if there is an error with parameter handling
+const params = new URLSearchParams(document.location.search)
+const diffParam = params.get("difficulty")
 currDifficulty = diffParam
 
 // Initialize all global variables
-const NUMBER_OF_GUESSES = 6;
-let guessesRemaining = NUMBER_OF_GUESSES;
-let currentGuess = [];
-let nextLetter = 0;
+const NUMBER_OF_GUESSES = 6
+let guessesRemaining = NUMBER_OF_GUESSES
+let currentGuess = []
+let nextLetter = 0
 let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
-let aiGuessHistory = [];
-let aiGuessContext = [];
+let aiGuessHistory = []
+let aiGuessContext = []
 
 console.log(correctGuessString)
 
+// Initialize player and AI boards
 function initBoard(boardName) {
-    let board = document.getElementById(boardName);
+    let board = document.getElementById(boardName)
 
     for (let i = 0; i < NUMBER_OF_GUESSES; i++) {
         let row = document.createElement("div")
         row.id = boardName + "-letter-row"
         row.className = "letter-row"
-
 
         for (let j = 0; j < 5; j++) {
             let box = document.createElement("div")
@@ -46,12 +46,14 @@ function initBoard(boardName) {
     }
 }
 
+// Function to control turns
 function turn() {
     if (checkPlayerGuess()) {
         checkAIGuess()
     }
 }
 
+// Check player guess for validity and correctness
 function checkPlayerGuess() {
     let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let guessString = ''
@@ -100,15 +102,16 @@ function checkPlayerGuess() {
     if (guessString === correctGuessString) {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
-        fillAiBoard();
-        return false;
+        fillAiBoard()
+        return false
     } else {
-        currentGuess = [];
-        nextLetter = 0;
-        return true;
+        currentGuess = []
+        nextLetter = 0
+        return true
     }
 }
 
+// Wrapper fuction to check AI guess based on difficulty
 async function checkAIGuess() {
 
     console.log("Client Guess History: " + aiGuessHistory)
@@ -116,21 +119,22 @@ async function checkAIGuess() {
 
     switch (currDifficulty) {
         case Difficulty.Easy:
-            await getGuessEasy().then((value) => { checkAiLogic(value) });
-            break;
+            await getGuessEasy().then((value) => { checkAiLogic(value) })
+            break
         case Difficulty.Medium:
-            await getGuessMedium().then((value) => { checkAiLogic(value) });
-            break;
+            await getGuessMedium().then((value) => { checkAiLogic(value) })
+            break
         default:
-            await getGuessHard().then((value) => { checkAiLogic(value) });
-            break;
+            await getGuessHard().then((value) => { checkAiLogic(value) })
+            break
     }
 
 }
 
+// Logic to check AI guess for correctness
 function checkAiLogic(guessString) {
 
-    let contextString = "";
+    let contextString = ""
     guessString = guessString.slice(0, -1)
 
     let row = document.getElementById("ai-game-board").children[6 - guessesRemaining]
@@ -188,10 +192,11 @@ function checkAiLogic(guessString) {
 
 }
 
+//Functions to access server endpoints
 async function getGuessEasy() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-easy');
-    const aiGuessText = await aiGuess.text();
-    return aiGuessText;
+    const aiGuess = await fetch('http://localhost:8889/py-data-easy')
+    const aiGuessText = await aiGuess.text()
+    return aiGuessText
 }
 
 async function postGuessMedium() {
@@ -210,42 +215,43 @@ async function postGuessMedium() {
                     guess: aiGuessHistory,
                     context: aiGuessContext
                 })
-            }).then( response => {
+            }).then(response => {
 
                 // console.log(response.status)
 
                 // if (response.status == 200) {
 
                 //     _continue = true
-                    
+
                 // }
 
-            });
+            })
 
-            // console.log(_continue)
+        // console.log(_continue)
 
-            // if (_continue) {
+        // if (_continue) {
 
 
-            // }
-        
+        // }
+
     } else {
-        return getGuessEasy();
+        return getGuessEasy()
     }
 }
 
 async function getGuessMedium() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
-    const aiGuessText = await aiGuess.text();
-    return aiGuessText;
+    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get')
+    const aiGuessText = await aiGuess.text()
+    return aiGuessText
 }
 
 async function getGuessHard() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-hard-get');
-    const aiGuessText = await aiGuess.text();
-    return aiGuessText;
+    const aiGuess = await fetch('http://localhost:8889/py-data-hard-get')
+    const aiGuessText = await aiGuess.text()
+    return aiGuessText
 }
 
+// Fill AI board with guesses at end of game
 function fillAiBoard() {
 
     for (let i = 0; i < aiGuessHistory.length; i++) {
@@ -258,6 +264,7 @@ function fillAiBoard() {
 
 }
 
+// Insert letter into player board on keyboard input
 function insertLetter(pressedKey) {
     if (nextLetter === 5) {
         return
@@ -273,22 +280,23 @@ function insertLetter(pressedKey) {
     nextLetter += 1
 }
 
+//Animation function for colors
 const animateCSS = (element, animation, prefix = 'animate__') =>
     new Promise((resolve, reject) => {
-        const animationName = `${prefix}${animation}`;
+        const animationName = `${prefix}${animation}`
         const node = element
-        node.style.setProperty('--animate-duration', '0.3s');
+        node.style.setProperty('--animate-duration', '0.3s')
 
-        node.classList.add(`${prefix}animated`, animationName);
+        node.classList.add(`${prefix}animated`, animationName)
 
         function handleAnimationEnd(event) {
-            event.stopPropagation();
-            node.classList.remove(`${prefix}animated`, animationName);
-            resolve('Animation ended');
+            event.stopPropagation()
+            node.classList.remove(`${prefix}animated`, animationName)
+            resolve('Animation ended')
         }
 
         node.addEventListener('animationend', handleAnimationEnd, { once: true });
-    });
+    })
 
 document.addEventListener("keyup", (e) => {
 
@@ -315,6 +323,7 @@ document.addEventListener("keyup", (e) => {
     }
 })
 
+// Event listener for on-screen keyboard
 document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     const target = e.target
 
@@ -330,6 +339,7 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
     document.dispatchEvent(new KeyboardEvent("keyup", { 'key': key }))
 })
 
+//Shade on-screen keyboard based on letter correctness
 function shadeKeyBoard(letter, color) {
     for (const elem of document.getElementsByClassName("keyboard-button")) {
         if (elem.textContent === letter) {
@@ -348,6 +358,7 @@ function shadeKeyBoard(letter, color) {
     }
 }
 
+// Delete letter from box
 function deleteLetter() {
     let row = document.getElementById("player-game-board").children[6 - guessesRemaining]
     let box = row.children[nextLetter - 1]
@@ -357,5 +368,6 @@ function deleteLetter() {
     nextLetter -= 1
 }
 
-initBoard("player-game-board");
-initBoard("ai-game-board");
+//Initialize both boards to start game
+initBoard("player-game-board")
+initBoard("ai-game-board")
