@@ -115,8 +115,8 @@ function checkPlayerGuess() {
 
 async function checkAIGuess() {
 
-    console.log("Guess History: " + aiGuessHistory)
-    console.log("Guess Context: " + aiGuessContext)
+    console.log("Client Guess History: " + aiGuessHistory)
+    console.log("Client Context: " + aiGuessContext)
 
     switch (currDifficulty) {
         case Difficulty.Easy:
@@ -145,7 +145,6 @@ function checkAiLogic(guessString) {
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
         let box = row.children[i]
-        let letter = currentGuess[i]
 
         let letterPosition = rightGuess.indexOf(currentGuess[i])
         if (letterPosition === -1) {
@@ -182,6 +181,7 @@ function checkAiLogic(guessString) {
         guessesRemaining -= 1
         currentGuess = []
         nextLetter = 0
+        postGuessMedium()
 
         if (guessesRemaining == 0) {
             fillAiBoard()
@@ -198,32 +198,50 @@ async function getGuessEasy() {
     return aiGuessText;
 }
 
-async function getGuessMedium() {
-    if(guessesRemaining != 6) {
-        fetch('http://localhost:8889/py-data-medium-post', 
-        {   
-            method: 'POST',
-            headers:
+async function postGuessMedium() {
+
+    var _continue = false
+
+    if (guessesRemaining != 6) {
+        fetch('http://localhost:8889/py-data-medium-post',
             {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                //parse through history, send with context. NEEDS UPDATE
-                guess: aiGuessHistory,
-                context: aiGuessContext
-            })
-        });
+                method: 'POST',
+                headers:
+                {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    guess: aiGuessHistory,
+                    context: aiGuessContext
+                })
+            }).then( response => {
 
-        const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
-        const aiGuessText = await aiGuess.text();
-        return aiGuessText; 
-    }
+                // console.log(response.status)
 
-    else {
+                // if (response.status == 200) {
 
+                //     _continue = true
+                    
+                // }
+
+            });
+
+            // console.log(_continue)
+
+            // if (_continue) {
+
+
+            // }
+        
+    } else {
         return getGuessEasy();
+    }
+}
 
-    } 
+async function getGuessMedium() {
+    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get');
+    const aiGuessText = await aiGuess.text();
+    return aiGuessText;
 }
 
 async function getGuessHard() {
