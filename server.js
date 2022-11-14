@@ -1,63 +1,63 @@
 //We use express for Browser to interpret HTML
-const express = require("express");
-const app = express();
-app.use(express.json());
+const express = require("express")
+const app = express()
+app.use(express.json())
 
 //Recieve random guess to start always
-var context;
-var aiGuess;
-var guess;
+var context
+var aiGuess
+var guess
 getGuessEasy()
 
 //Set endpoint for sending python EASY MODE data. Collect Ensuing Guesses
 app.get('/py-data-easy', (req, res) => {
-  getGuessEasy();
-  res.send(aiGuess);
+  getGuessEasy()
+  res.send(aiGuess)
 })
 
 //Get Easy Guess
 function getGuessEasy() {
-  const spawn = require('child_process').spawn;
-  const ls = spawn('python3', ['scripts/Easy.py']);
+  const spawn = require('child_process').spawn
+  const ls = spawn('python3', ['scripts/Easy.py'])
   ls.stdout.on('data', (data) => {
-    aiGuess = data + '';
-  });
+    aiGuess = data + ''
+  })
   ls.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
-  });
+    console.log(`stderr: ${data}`)
+  })
 }
 
 //Set endpoint for sending python MEDIUM MODE data. Collect Ensuing Guesses
 app.get('/py-data-medium-get', (req, res) => {
-  getGuessMedium(guess, context);
-  res.send(aiGuess);
+  getGuessMedium(guess, context)
+  res.send(aiGuess)
 })
 
 //Set endpoint to recieve data from Script for Python AI
 app.post('/py-data-medium-post',  (req, res) => {
-  guess = req.body.guess;
-  context = req.body.context;
-  console.log("Server Guess History: " + guess);
-  console.log("Server Context: " + context);
-  res.sendStatus(200);
+  guess = req.body.guess
+  context = req.body.context
+  console.log("Server Guess History: " + guess)
+  console.log("Server Context: " + context)
+  res.sendStatus(200)
 })
 
 //Get Medium Guess
 function getGuessMedium(guess, context) {
-  const spawn = require('child_process').spawn;
-  const ls = spawn('python3', ['scripts/Medium.py', guess, context]); //call the function with an argument(s)
+  const spawn = require('child_process').spawn
+  const ls = spawn('python3', ['scripts/Medium.py', guess, context]) //Call the function with an argument(s)
   ls.stdout.on('data', (data) => {
-    aiGuess = data + '';
-  });
+    aiGuess = data + ''
+  })
   ls.stderr.on('data', (data) => {
-    console.log(`stderr: ${data}`);
-  });
+    console.log(`stderr: ${data}`)
+  })
 }
 
 //Launch server
 app.listen(8889, () => {
-  console.log("Application started and Listening on port 8889");
-});
+  console.log("Application started and Listening on port 8889")
+})
 
 //Avoid MIME type checking from browser for boards
-app.use(express.static(__dirname));
+app.use(express.static(__dirname))
