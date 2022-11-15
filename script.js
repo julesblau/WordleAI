@@ -181,12 +181,15 @@ function checkAiLogic(guessString) {
         guessesRemaining -= 1
         currentGuess = []
         nextLetter = 0
-        postGuessMedium()
 
         if (guessesRemaining == 0) {
             fillAiBoard()
             toastr.info("Neither player got it! It's a draw!")
             toastr.info(`The right word was: "${correctGuessString}"`)
+        } else {
+
+            postGuessMedium()
+
         }
     }
 
