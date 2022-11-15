@@ -255,6 +255,20 @@ async function getGuessHard() {
     return aiGuessText
 }
 
+async function clearServer() {
+
+
+    fetch('http://localhost:8889/reset-game',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
+}
+
 // Fill AI board with guesses at end of game
 function fillAiBoard() {
 

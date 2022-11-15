@@ -12,7 +12,7 @@ getGuessEasy()
 //Get Easy Guess
 function getGuessEasy() {
   const spawn = require('child_process').spawn
-  const ls = spawn('python', ['scripts/Easy.py'])
+  const ls = spawn('python3', ['scripts/Easy.py'])
   ls.stdout.on('data', (data) => {
     aiGuess = data + ''
   })
@@ -25,7 +25,7 @@ function getGuessEasy() {
 function getGuessMedium() {
   const spawn = require('child_process').spawn
   console.log(guess + " " + context)
-  const ls = spawn('python', ['scripts/Medium.py', guess, context]) //Call the function with an arguments
+  const ls = spawn('python3', ['scripts/Medium.py', guess, context]) //Call the function with an arguments
   ls.stdout.on('data', (data) => {
     aiGuess = data + ''
   })
@@ -52,6 +52,13 @@ app.post('/py-data-medium-post', (req, res) => {
   context = req.body.context
   console.log("Server Guess History: " + guess)
   console.log("Server Context: " + context)
+  res.sendStatus(200)
+})
+
+//Set endpoint to clear game
+app.post('/reset-game', (req, res) => {
+  guess = undefined
+  context = undefined
   res.sendStatus(200)
 })
 
