@@ -9,6 +9,7 @@ if __name__ == '__main__':
     wordList = my_file.read().split("\n")
     my_file.close()
 
+    f = open("scripts/outputtext.txt", "w")
     # Create lists to hold context of letters
     greens = [None, None, None, None, None]
     yellows = [[], [], [], [], []]
@@ -20,6 +21,8 @@ if __name__ == '__main__':
 
     # For each letter in each word
     for i in range(len(context)):
+        f.write(guessHistory[i])
+        f.write("\n")
         for j in range(5):
             currLetter = (guessHistory[i])[j]
 
@@ -82,4 +85,5 @@ if __name__ == '__main__':
     # Choose random word from remaining (valid) words
     guess = np.random.choice(possibleGuesses)
     print(guess)
-    sys.stdout.flush()
+    f.close()
+    # sys.stdout.flush()

@@ -176,6 +176,9 @@ function checkAiLogic(guessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
+        currentGuess = []
+        aiGuessHistory = []
+        aiGuessContext = []
         return
     } else {
         guessesRemaining -= 1
@@ -186,6 +189,9 @@ function checkAiLogic(guessString) {
             fillAiBoard()
             toastr.info("Neither player got it! It's a draw!")
             toastr.info(`The right word was: "${correctGuessString}"`)
+            currentGuess = []
+            aiGuessHistory = []
+            aiGuessContext = []
         } else {
 
             postGuessMedium()
