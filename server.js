@@ -24,7 +24,8 @@ function getGuessEasy() {
 //Get Medium Guess
 function getGuessMedium() {
   const spawn = require('child_process').spawn
-  const ls = spawn('python3', ['scripts/Medium.py', guess, context]) //Call the function with an argument(s)
+  console.log(guess + " " + context)
+  const ls = spawn('python3', ['scripts/Medium.py', guess, context]) //Call the function with an arguments
   ls.stdout.on('data', (data) => {
     aiGuess = data + ''
   })
