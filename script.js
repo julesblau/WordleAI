@@ -179,6 +179,7 @@ function checkAiLogic(guessString) {
         currentGuess = []
         aiGuessHistory = []
         aiGuessContext = []
+        clearServer()
         return
     } else {
         guessesRemaining -= 1
@@ -192,6 +193,7 @@ function checkAiLogic(guessString) {
             currentGuess = []
             aiGuessHistory = []
             aiGuessContext = []
+            clearServer()
         } else {
 
             postGuessMedium()
