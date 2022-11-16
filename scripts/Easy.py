@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     # Create lists to hold context of letters
     greens = [None, None, None, None, None]
-    yellows = [[], [], [], [], []]
+    yellows = []
 
     # Get guess history and context from system args
     guessHistory = sys.argv[1].strip("[]").split(",")
@@ -19,23 +19,29 @@ if __name__ == '__main__':
 
     # For each letter in each word
     for i in range(len(context)):
-        f.write(guessHistory[i])
-        f.write("\n")
+        # f.write(guessHistory[i])
+        # f.write("\n")
         for j in range(5):
             currLetter = (guessHistory[i])[j]
 
             # If we recieve 2, add letter to green list in correct position
             if (context[i])[j] == '2':
                 greens[j] = currLetter
-                for k in range(5):
-                    if currLetter in yellows[k]:
-                        yellows[k].remove(currLetter)
+                if currLetter in yellows:
+                    yellows.remove(currLetter)
 
             # If we recieve 1, add letter to yellow list if not there
-            elif (context[i])[j] == '1' and currLetter not in yellows[j] and currLetter not in greens:
-                yellows[j].append(currLetter)
+            elif (context[i])[j] == '1' and currLetter not in yellows and currLetter not in greens:
+                yellows.append(currLetter)
 
     possibleGuesses = wordList.copy()
+
+    for word in guessHistory:
+        # possibleGuesses.remove(word)
+        f.write(word)
+        f.write("\n")
+
+    wordList = possibleGuesses.copy()
 
     # If word in guess list doesn't have green letter in correct position, remove word from guess list
     for word in wordList:
@@ -49,14 +55,10 @@ if __name__ == '__main__':
 
     # If word in guess list doesn't have yellow letter in word, remove word from guess list
     for word in wordList:
-        _continue = True
-        for i in range(5):
-            if yellows[i] != []:
-                for letter in yellows[i]:
-                    if (letter not in word) and _continue:
-                        possibleGuesses.remove(word)
-                        _continue = False
-                        break
+        for letter in yellows:
+            if letter not in word:
+                possibleGuesses.remove(word)
+                break
     
     f.write("Possible Guesses: ")
     f.write(str(possibleGuesses))
