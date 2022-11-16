@@ -8,6 +8,7 @@ app.use(express.json())
 var context = undefined
 var aiGuess = undefined
 var guess = undefined
+
 const spawn = require('child_process').spawn
 
 //Get Guess from Python
@@ -36,8 +37,6 @@ app.get('/py-data-medium-get', async (req, res) => {
 app.post('/py-data-post', (req, res) => {
   guess = req.body.guess
   context = req.body.context
-  console.log("Server Guess History: " + guess)
-  console.log("Server Context: " + context)
   res.sendStatus(200)
 })
 
@@ -50,7 +49,7 @@ app.post('/reset-game', (req, res) => {
 
 //Launch server
 app.listen(8889, () => {
-  console.log("Application started and Listening on port 8889")
+  console.log("Application started and listening on port 8889")
 })
 
 //Avoid MIME type checking from browser for boards

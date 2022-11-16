@@ -24,8 +24,6 @@ let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = []
 let aiGuessContext = []
 
-console.log(correctGuessString)
-
 // Initialize player and AI boards
 function initBoard(boardName) {
     let board = document.getElementById(boardName)
@@ -113,9 +111,6 @@ function checkPlayerGuess() {
 
 // Wrapper fuction to check AI guess based on difficulty
 async function checkAIGuess() {
-
-    console.log("Client Guess History: " + aiGuessHistory)
-    console.log("Client Context: " + aiGuessContext)
 
     switch (currDifficulty) {
         case Difficulty.Easy:
