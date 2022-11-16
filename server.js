@@ -4,9 +4,9 @@ const app = express()
 app.use(express.json())
 
 //Recieve random guess to start always
-var context
-var aiGuess
-var guess
+var context = undefined
+var aiGuess = undefined
+var guess = undefined
 getGuessEasy()
 
 //Get Easy Guess
@@ -26,7 +26,7 @@ function getGuessMedium() {
   const spawn = require('child_process').spawn
   console.log(guess + " " + context)
   const ls = spawn('python3', ['scripts/Medium.py', guess, context]) //Call the function with an arguments
-  ls.stdout.on('data', (data) => {
+  ls.stdout.on('data', (data) => { 
     aiGuess = data + ''
   })
   ls.stderr.on('data', (data) => {
@@ -44,6 +44,7 @@ app.get('/py-data-easy', (req, res) => {
 app.get('/py-data-medium-get', (req, res) => {
   getGuessMedium()
   res.send(aiGuess)
+  aiGuess = undefined
 })
 
 //Set endpoint to recieve data from Script for Python AI

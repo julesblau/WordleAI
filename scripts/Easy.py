@@ -1,5 +1,5 @@
 import numpy as np
-import sys #so we can access arguments when passed. i.e. sys.argv[1], etc.
+import sys
 
 if __name__ == '__main__':
     #Read in WordList

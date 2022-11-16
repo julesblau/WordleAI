@@ -195,9 +195,7 @@ function checkAiLogic(guessString) {
             aiGuessContext = []
             clearServer()
         } else {
-
             postGuessMedium()
-
         }
     }
 

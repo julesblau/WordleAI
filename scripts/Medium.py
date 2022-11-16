@@ -5,9 +5,8 @@ import string
 if __name__ == '__main__':
 
     # Read in WordList
-    my_file = open("resources/solutions.txt", "r")
-    wordList = my_file.read().split("\n")
-    my_file.close()
+    wordListFile = open("resources/solutions.txt", "r")
+    wordList = wordListFile.read().split("\n")
 
     f = open("scripts/outputtext.txt", "w")
     # Create lists to hold context of letters
@@ -81,9 +80,18 @@ if __name__ == '__main__':
             if letter in word:
                 possibleGuesses.remove(word)
                 break
+    f.write("Possible Guesses: ")
+    f.write(str(possibleGuesses))
+    f.write("\n")
 
     # Choose random word from remaining (valid) words
     guess = np.random.choice(possibleGuesses)
+    f.write("Guess: ")
+    f.write(guess)
+    f.write("\n")
     print(guess)
+    wordList = wordListFile.read().split("\n")
+    wordListFile.close()
+    possibleGuesses = wordList.copy()
     f.close()
-    # sys.stdout.flush()
+    sys.stdout.flush()
