@@ -39,14 +39,6 @@ if __name__ == '__main__':
     for word in wordList:
         if word in guessHistory:
             possibleGuesses.remove(word)
-            # f.write(word)
-            # f.write("\n")
-
-
-    # for i in range(len(guessHistory)):
-    #     # possibleGuesses.remove(guessHistory[i])
-    #     f.write(word)
-    #     f.write("\n")
 
     wordList = possibleGuesses.copy()
 
