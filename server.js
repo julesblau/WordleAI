@@ -51,8 +51,6 @@ app.get('/py-data-medium-get', (req, res) => {
 app.post('/py-data-medium-post', (req, res) => {
   guess = req.body.guess
   context = req.body.context
-  console.log("Server Guess History: " + guess)
-  console.log("Server Context: " + context)
   res.sendStatus(200)
 })
 
@@ -65,7 +63,7 @@ app.post('/reset-game', (req, res) => {
 
 //Launch server
 app.listen(8889, () => {
-  console.log("Application started and Listening on port 8889")
+  console.log("Application started and listening on port 8889")
 })
 
 //Avoid MIME type checking from browser for boards
