@@ -1,6 +1,5 @@
 //We use express for Browser to interpret HTML
 const express = require("express")
-const { chmod } = require("fs")
 const app = express()
 app.use(express.json())
 
