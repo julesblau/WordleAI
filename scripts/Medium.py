@@ -8,6 +8,7 @@ if __name__ == '__main__':
     wordList = wordListFile.read().split("\n")
 
     f = open("scripts/outputtext.txt", "w")
+
     # Create lists to hold context of letters
     greens = [None, None, None, None, None]
     yellows = [[], [], [], [], []]
