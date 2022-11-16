@@ -119,13 +119,13 @@ async function checkAIGuess() {
 
     switch (currDifficulty) {
         case Difficulty.Easy:
-            await getGuessEasy().then((value) => { checkAiLogic(value) })
+            await getGuess('http://localhost:8889/py-data-easy-get').then((value) => { checkAiLogic(value) })
             break
         case Difficulty.Medium:
-            await getGuessMedium().then((value) => { checkAiLogic(value) })
+            await getGuess('http://localhost:8889/py-data-medium-get').then((value) => { checkAiLogic(value) })
             break
         default:
-            await getGuessHard().then((value) => { checkAiLogic(value) })
+            await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { checkAiLogic(value) })
             break
     }
 
@@ -195,24 +195,22 @@ function checkAiLogic(guessString) {
             aiGuessContext = []
             clearServer()
         } else {
-            postGuessMedium()
+            postGuess()
         }
     }
 
 }
 
 //Functions to access server endpoints
-async function getGuessEasy() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-easy')
+async function getGuess(url) {
+    const aiGuess = await fetch(url)
     const aiGuessText = await aiGuess.text()
     return aiGuessText
 }
 
-async function postGuessMedium() {
+async function postGuess() {
 
-    var _continue = false
-
-    fetch('http://localhost:8889/py-data-medium-post',
+    fetch('http://localhost:8889/py-data-post',
         {
             method: 'POST',
             headers:
@@ -223,40 +221,10 @@ async function postGuessMedium() {
                 guess: aiGuessHistory,
                 context: aiGuessContext
             })
-        }).then(response => {
-
-            // console.log(response.status)
-
-            // if (response.status == 200) {
-
-            //     _continue = true
-
-            // }
-
         })
-
-    // console.log(_continue)
-
-    // if (_continue) {
-
-
-    // }
-}
-
-async function getGuessMedium() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-medium-get')
-    const aiGuessText = await aiGuess.text()
-    return aiGuessText
-}
-
-async function getGuessHard() {
-    const aiGuess = await fetch('http://localhost:8889/py-data-hard-get')
-    const aiGuessText = await aiGuess.text()
-    return aiGuessText
 }
 
 async function clearServer() {
-
 
     fetch('http://localhost:8889/reset-game',
         {
@@ -267,6 +235,7 @@ async function clearServer() {
             },
             body: JSON.stringify({})
         })
+        
 }
 
 // Fill AI board with guesses at end of game
