@@ -1,0 +1,6 @@
+deign
+condo
+sloth
+moult
+Possible Guesses: ['boost', 'roost']
+Guess: boost
