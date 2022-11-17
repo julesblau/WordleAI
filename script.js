@@ -26,6 +26,8 @@ let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = []
 let aiGuessContext = []
 
+console.log(correctGuessString)
+
 // Initialize player and AI boards
 function initBoard(boardName) {
     let board = document.getElementById(boardName)
@@ -72,6 +74,7 @@ function checkPlayerGuess() {
         toastr.error("Invalid Guess!")
         return false
     }
+
 
     for (let i = 0; i < 5; i++) {
         let letterColor = ''
