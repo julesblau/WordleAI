@@ -24,6 +24,8 @@ let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = []
 let aiGuessContext = []
 
+console.log(correctGuessString)
+
 // Initialize player and AI boards
 function initBoard(boardName) {
     let board = document.getElementById(boardName)
@@ -71,30 +73,46 @@ function checkPlayerGuess() {
         return false
     }
 
+    let letterColors = []
+
     for (let i = 0; i < 5; i++) {
-        let letterColor = ''
-        let box = row.children[i]
         let letter = currentGuess[i]
-
         let letterPosition = rightGuess.indexOf(currentGuess[i])
+        
         if (letterPosition === -1) {
-            letterColor = 'grey'
+            letterColors.push('grey')
         } else {
-            if (currentGuess[i] === rightGuess[i]) {
-                letterColor = 'green'
-            } else {
-                letterColor = 'yellow'
-            }
+            if(letter === rightGuess[i]) {
+                letterColors.push('green')
 
-            rightGuess[letterPosition] = "#"
+                for(let j = 0; j < i; j++) {
+
+                    if(letterColors[j] == 'yellow' && currentGuess[i] == currentGuess[j]) {
+
+                        letterColors[j]  = 'grey'
+
+                    }
+
+                }
+
+            } else {
+                letterColors.push('yellow')
+            }
+            // rightGuess[letterPosition] = "#"
         }
+    }
+
+    for (let i = 0; i < 5; i++) {
+        let letter = currentGuess[i]
+        let box = row.children[i]
 
         let delay = 250 * i
         setTimeout(() => {
             animateCSS(box, 'flipInX')
-            box.style.backgroundColor = letterColor
-            shadeKeyBoard(letter, letterColor)
+            box.style.backgroundColor = letterColors[i]
+            shadeKeyBoard(letter, letterColors[i])
         }, delay)
+
     }
 
     if (guessString === correctGuessString) {
