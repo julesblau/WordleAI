@@ -2,17 +2,17 @@
 https://github.com/Morgenstern2573/wordle_clone/blob/master/build/style.css */
 
 *{
-  font-family: sans-serif;
+  font-family: sans-serif, bold;
 }
 
 body{
-  background-color: var(--background-color);
-  color: var(--text-color);
+  background-color: #72d5bf;
+  position: absolute;
+  z-index: 1;
 }
 
-.dark-mode{
-  background-color: black;
-  color: var(--secondary-color);
+#screen{
+  z-index: 999;
 }
 
 h1 {
@@ -22,6 +22,7 @@ h1 {
 }
 
 .button {
+  border-style: solid;
   margin: 0 auto;
   width: 50%;
   min-height: 30px;
@@ -30,10 +31,11 @@ h1 {
   margin-bottom: 10px;
 }
 .button:hover {
-  background-color: green;
+  background-color: rgb(195, 195, 195);
 }
 
 .dropbtn{
+  border-style: solid;
   margin: auto;
   width: 50%;
   min-height: 30px;
@@ -46,17 +48,21 @@ h1 {
 .dropdown {
   margin: auto;
   display: center;
+  position: relative;
 }
 
 /* Dropdown Content (Hidden by Default) */
 .dropdown-content {
-  left: 25%;
+  border-style: solid;
+  left: 37.5%;
   position: relative;
   text-align: center;
-  width: 50%;
+  width: 25%;
   display: none;
   background-color: #f1f1f1;
   box-shadow: rgba(0,0,0,0.2);
+  border-radius: 10px;
+  margin-bottom: 10px;
   z-index: 1;
 }
 
@@ -70,13 +76,19 @@ h1 {
 }
 
 /* Change color of dropdown links on hover */
-.dropdown-content a:hover {background-color: #ddd;}
+.dropdown-content a:hover {
+  background-color: #ddd;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  border-radius: 10px;
+}
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {display: block;}
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {background-color: #3e8e41;}
+.dropdown:hover .dropbtn {background-color: rgb(195, 195, 195);}
 
 a:link {
   text-decoration: none;
@@ -135,6 +147,7 @@ table tr td:empty{
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
+  background-color: white;
 }
 
 .filled-box {
