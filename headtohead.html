@@ -1,32 +1,37 @@
 <!--Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
     https://github.com/Morgenstern2573/wordle_clone/blob/master/build/index.html -->
-    <!--Favicon by NYTimes -->
+<!--Favicon by NYTimes -->
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>WordleAI</title>
-        <link rel="icon" href="https://www.nytimes.com/games-assets/v2/metadata/wordle-apple-touch-icon.png?v=v2211081315">
-        <link rel="stylesheet" href="css/style.css">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-        <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-      />
-    </head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WordleAI</title>
+    <link rel="icon" href="https://www.nytimes.com/games-assets/v2/metadata/wordle-apple-touch-icon.png?v=v2211081315">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
 <body>
     <div class="title">
-        <a href="index.html"><h1> WordleAI </h1></a>
+        <a href="index.html">
+            <h1> WordleAI </h1>
+        </a>
     </div>
-    
+
     <div id="game-boards">
         <table class="center">
             <tr>
-                <td><div id="player-game-board" class="game-board"> Player </div></td>
+                <td>
+                    <div id="player-game-board" class="game-board"> Player </div>
+                </td>
                 <td></td>
-                <td><div id="ai-game-board" class="game-board"> AI </div></td>
+                <td>
+                    <div id="ai-game-board" class="game-board"> AI </div>
+                </td>
             </tr>
         </table>
     </div>
@@ -67,11 +72,10 @@
             <button class="keyboard-button">Enter</button>
         </div>
     </div>
-    <script
-    src="https://code.jquery.com/jquery-3.6.0.min.js"
-    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="script.js" type="module"></script>
 </body>
+
 </html>
