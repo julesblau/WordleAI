@@ -1,5 +1,7 @@
 // Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
 // https://github.com/Morgenstern2573/wordle_clone/blob/master/build/script.js
+import { startConfetti } from "./resources/confetti.js"
+import { stopConfetti } from "./resources/confetti.js"
 
 import { SOLUTIONS } from "./resources/solutions.js"
 import { GUESSES } from "./resources/valid_guesses.js"
@@ -104,6 +106,12 @@ function checkPlayerGuess() {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
+        // setTimeout(function(){
+        //     startConfetti()
+        // },500)
+        // setTimeout(function(){
+        //     stopConfetti()
+        // },5000)
         return false
     } else {
         currentGuess = []
@@ -174,6 +182,12 @@ function checkAiLogic(guessString) {
         toastr.error("The AI guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
+        setTimeout(function(){
+            startConfetti()
+        },500)
+        setTimeout(function(){
+            stopConfetti()
+        },5000)
         currentGuess = []
         aiGuessHistory = []
         aiGuessContext = []
