@@ -21,7 +21,7 @@ if __name__ == '__main__':
         for j in range(5):
             currLetter = (guessHistory[i])[j]
 
-            # If we recieve 2, add letter to green list in correct position
+            # If context is 2, add letter to green list in correct position
             if (context[i])[j] == '2':
                 greens[j] = currLetter
                 for k in range(5):
@@ -30,13 +30,13 @@ if __name__ == '__main__':
                 if currLetter in grays:
                     grays.remove(currLetter)
 
-            # If we recieve 1, add letter to yellow list if not there
+            # If context is 1, add letter to yellow list in known incorrect position if not already there
             elif (context[i])[j] == '1' and currLetter not in yellows[j] and currLetter not in greens:
                 yellows[j].append(currLetter)
                 if currLetter in grays:
                     grays.remove(currLetter)
 
-            # If we recieve 0, add letter to gray list if not there
+            # If context is 0, add letter to gray list if not already there
             elif (context[i])[j] == '0' and currLetter not in grays and currLetter not in greens:
                 add = True
                 for k in range(5):
