@@ -76,29 +76,57 @@ function checkPlayerGuess() {
     }
 
 
+    let letterColor = [null, null, null, null, null]
     for (let i = 0; i < 5; i++) {
-        let letterColor = ''
+        let letterPosition = rightGuess.indexOf(currentGuess[i])
+
+        if (letterPosition === -1) {
+            letterColor[i] = 'grey'
+        } else if (currentGuess[i] === rightGuess[i]) {
+            letterColor[i] = 'green'
+        }
+
+    }
+
+    for (let i = 0; i < 5; i++) {
+        if (letterColor[i] == null) {
+            let letterPosition = rightGuess.indexOf(currentGuess[i])
+            if (letterColor[letterPosition] == 'green') {
+                rightGuess[letterPosition] = '#'
+                letterPosition = rightGuess.indexOf(currentGuess[i])
+                if (letterPosition == -1) {
+                    letterColor[i] = 'grey'
+                } else {
+                    if (letterColor[letterPosition] == 'green') {
+                        rightGuess[letterPosition] = '#'
+                        letterPosition = rightGuess.indexOf(currentGuess[i])
+                        if (letterPosition == -1) {
+                            letterColor[i] = 'grey'
+                        }
+                    } else {
+                        letterColor[i] = 'yellow'
+                        rightGuess[letterPosition] = '#'
+                    }
+                }
+            } else if (letterPosition == -1) {
+                letterColor[i] = 'grey'
+            } else {
+                letterColor[i] = 'yellow'
+                rightGuess[letterPosition] = '#'
+            }
+        }
+    }
+
+    for (let i = 0; i < 5; i++) {
+
         let box = row.children[i]
         let letter = currentGuess[i]
-
-        let letterPosition = rightGuess.indexOf(currentGuess[i])
-        if (letterPosition === -1) {
-            letterColor = 'grey'
-        } else {
-            if (currentGuess[i] === rightGuess[i]) {
-                letterColor = 'green'
-            } else {
-                letterColor = 'yellow'
-            }
-
-            rightGuess[letterPosition] = "#"
-        }
 
         let delay = 250 * i
         setTimeout(() => {
             animateCSS(box, 'flipInX')
-            box.style.backgroundColor = letterColor
-            shadeKeyBoard(letter, letterColor)
+            box.style.backgroundColor = letterColor[i]
+            shadeKeyBoard(letter, letterColor[i])
         }, delay)
     }
 
@@ -106,13 +134,13 @@ function checkPlayerGuess() {
         toastr.success("You guessed right! Game over!")
         guessesRemaining = 0
         fillAiBoard()
-        setTimeout(function(){
+        setTimeout(function () {
             startConfetti()
-        },500)
-        setTimeout(function(){
+        }, 500)
+        setTimeout(function () {
             stopConfetti()
             document.getElementById('screen').style.display = "none";
-        },5000)
+        }, 5000)
         return false
     } else {
         currentGuess = []
@@ -141,6 +169,7 @@ async function checkAIGuess() {
 // Logic to check AI guess for correctness
 function checkAiLogic(guessString) {
 
+    let context = [null, null, null, null, null]
     let contextString = ""
     guessString = guessString.slice(0, -1)
 
@@ -149,30 +178,64 @@ function checkAiLogic(guessString) {
     currentGuess = Array.from(guessString)
     aiGuessHistory.push(guessString)
 
+    let letterColor = [null, null, null, null, null]
     for (let i = 0; i < 5; i++) {
-        let letterColor = ''
-        let box = row.children[i]
-
         let letterPosition = rightGuess.indexOf(currentGuess[i])
-        if (letterPosition === -1) {
-            letterColor = 'grey'
-            contextString += "0"
-        } else {
-            if (currentGuess[i] === rightGuess[i]) {
-                letterColor = 'green'
-                contextString += "2"
-            } else {
-                letterColor = 'yellow'
-                contextString += "1"
-            }
 
-            rightGuess[letterPosition] = "#"
+        if (letterPosition === -1) {
+            letterColor[i] = 'grey'
+            context[i] = '0'
+        } else if (currentGuess[i] === rightGuess[i]) {
+            letterColor[i] = 'green'
+            context[i] = '2'
         }
+
+    }
+
+    for (let i = 0; i < 5; i++) {
+        if (letterColor[i] == null) {
+            let letterPosition = rightGuess.indexOf(currentGuess[i])
+            if (letterColor[letterPosition] == 'green') {
+                rightGuess[letterPosition] = '#'
+                letterPosition = rightGuess.indexOf(currentGuess[i])
+                if (letterPosition == -1) {
+                    letterColor[i] = 'grey'
+                    context[i] = '0'
+                } else {
+                    if (letterColor[letterPosition] == 'green') {
+                        rightGuess[letterPosition] = '#'
+                        letterPosition = rightGuess.indexOf(currentGuess[i])
+                        if (letterPosition == -1) {
+                            letterColor[i] = 'grey'
+                            context[i] = '0'
+                        }
+                    } else {
+                        letterColor[i] = 'yellow'
+                        context[i] = '1'
+                        rightGuess[letterPosition] = '#'
+                    }
+                }
+            } else if (letterPosition == -1) {
+                letterColor[i] = 'grey'
+                context[i] = '0'
+            } else {
+                letterColor[i] = 'yellow'
+                context[i] = '1'
+                rightGuess[letterPosition] = '#'
+            }
+        }
+    }
+
+    contextString = context.join("")
+
+    for (let i = 0; i < 5; i++) {
+
+        let box = row.children[i]
 
         let delay = 250 * i
         setTimeout(() => {
             animateCSS(box, 'flipInX')
-            box.style.backgroundColor = letterColor
+            box.style.backgroundColor = letterColor[i]
             box.classList.add("filled-box")
         }, delay)
     }
@@ -242,7 +305,7 @@ async function clearServer() {
             },
             body: JSON.stringify({})
         })
-        
+
 }
 
 // Fill AI board with guesses at end of game

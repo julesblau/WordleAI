@@ -24,12 +24,12 @@ const spawn = require('child_process').spawn
 
 //Set endpoint for sending python EASY MODE data. Collect Ensuing Guesses
 app.get('/py-data-easy-get', async (req, res) => {
-  await getGuess('python', ['scripts/Easy.py', guess, context]).then((value) => { res.send(value) })
+  await getGuess('python3', ['scripts/Easy.py', guess, context]).then((value) => { res.send(value) })
 })
 
 //Set endpoint for sending python MEDIUM MODE data. Collect Ensuing Guesses
 app.get('/py-data-medium-get', async (req, res) => {
-  await getGuess('python', ['scripts/Medium.py', guess, context]).then((value) => { res.send(value) })
+  await getGuess('python3', ['scripts/Medium.py', guess, context]).then((value) => { res.send(value) })
 })
 
 //Set endpoint for sending python MEDIUM MODE data. Collect Ensuing Guesses
