@@ -2,16 +2,15 @@ const NUMBER_OF_GUESSES = 6
 let guessesRemaining = NUMBER_OF_GUESSES
 let currentGuess = []
 let nextLetter = 0
-let aiGuessHistory = []
-let aiGuessContext = []
+let guessHistory = []
+let guessContext = []
 
 let board = document.getElementById("solver")
 
-function initBoard() {
+function initRow() {
 
     let row = document.createElement("div")
     row.id = "solver-letter-row"
-    console.log(row.id)
 
     row.className = "letter-row"
 
@@ -29,15 +28,14 @@ async function checkAIGuess() {
     await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { checkAiLogic(value) })
 }
 
-// Logic to check AI guess for correctness
-function checkAiLogic() {
+// Logic to prepare user guess for AI suggestion 
+function processWordForAIGuess() {
 
     let contextString = ""
     let guessString = ""
 
     let row = document.getElementById("solver").children[6 - guessesRemaining]
     currentGuess = Array.from(guessString)
-    aiGuessHistory.push(guessString)
 
     for (let i = 0; i < 5; i++) {
         let box = row.children[i]
@@ -52,8 +50,59 @@ function checkAiLogic() {
         guessString += box.textContent
     }
 
-    aiGuessContext.push(contextString)
-    aiGuessHistory.push(guessString)
+    guessContext.push(contextString)
+    guessHistory.push(guessString)
+
+    guessesRemaining -= 1
+    currentGuess = []
+    nextLetter = 0
+
+    if (guessesRemaining == 0) {
+        currentGuess = []
+        guessHistory = []
+        guessContext = []
+        clearServer()
+    } else {
+        postGuess()
+        initRow()
+    }
+
+}
+
+//Functions to access server endpoints
+async function getGuess(url) {
+    const aiGuess = await fetch(url)
+    const aiGuessText = await aiGuess.text()
+    return aiGuessText
+}
+
+async function postGuess() {
+
+    fetch('http://localhost:8889/py-data-post',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                guess: guessHistory,
+                context: guessContext
+            })
+        })
+}
+
+async function clearServer() {
+
+    fetch('http://localhost:8889/reset-game',
+        {
+            method: 'POST',
+            headers:
+            {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({})
+        })
 
 }
 
@@ -92,11 +141,8 @@ document.addEventListener("keyup", (e) => {
             toastr.error("Not enough letters!")
             return false
         }
-    
-        guessesRemaining -= 1
-        currentGuess = []
-        nextLetter = 0
-        initBoard()
+
+        processWordForAIGuess()
         return
     }
 
@@ -196,4 +242,4 @@ function shadeKeyBoard(letter, color) {
 }
 
 
-initBoard()
+initRow()
