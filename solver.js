@@ -10,7 +10,7 @@ let board = document.getElementById("solver")
 function initBoard() {
 
     let row = document.createElement("div")
-    row.id = "solver-letter-row-" + (6 - guessesRemaining)
+    row.id = "solver-letter-row"
     console.log(row.id)
 
     row.className = "letter-row"
@@ -22,6 +22,39 @@ function initBoard() {
         row.appendChild(box)
     }
     board.appendChild(row)
+}
+
+// Wrapper fuction to check AI guess based on difficulty
+async function checkAIGuess() {
+    await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { checkAiLogic(value) })
+}
+
+// Logic to check AI guess for correctness
+function checkAiLogic() {
+
+    let contextString = ""
+    let guessString = ""
+
+    let row = document.getElementById("solver").children[6 - guessesRemaining]
+    currentGuess = Array.from(guessString)
+    aiGuessHistory.push(guessString)
+
+    for (let i = 0; i < 5; i++) {
+        let box = row.children[i]
+        if(box.style.backgroundColor == "grey"){
+            contextString += "0"
+        }else if(box.style.backgroundColor == "yellow"){
+            contextString += "1"
+        }else{
+            contextString += "2"
+        }
+
+        guessString += box.textContent
+    }
+
+    aiGuessContext.push(contextString)
+    aiGuessHistory.push(guessString)
+
 }
 
 // Insert letter into board on keyboard input
@@ -55,6 +88,11 @@ document.addEventListener("keyup", (e) => {
     }
 
     if (pressedKey === "Enter" && guessesRemaining != 0) {
+        if (currentGuess.length != 5) {
+            toastr.error("Not enough letters!")
+            return false
+        }
+    
         guessesRemaining -= 1
         currentGuess = []
         nextLetter = 0
@@ -88,11 +126,12 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 // Event listener toggling boxes
 document.getElementById("solver").addEventListener("click", (e) => {
+    var board = document.getElementById("solver")
     const target = e.target
 
     if (!target.classList.contains("filled-box")) {
         return
-    }else if (target.parentElement.id != ("solver-letter-row-" + (6 - guessesRemaining))) {
+    }else if (target.parentElement != board.children[6 - guessesRemaining]) {
         return
     }
     let currentColor = target.style.backgroundColor
@@ -114,6 +153,7 @@ function deleteLetter() {
     let box = row.children[nextLetter - 1]
     box.textContent = ""
     box.classList.remove("filled-box")
+    box.style.backgroundColor = "white"
     currentGuess.pop()
     nextLetter -= 1
 }
