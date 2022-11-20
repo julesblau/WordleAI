@@ -5,6 +5,8 @@ let nextLetter = 0
 let guessHistory = []
 let guessContext = []
 let aiSuggestedGuess = ""
+let greens = [null, null, null, null, null]
+let yellows = []
 
 let board = document.getElementById("solver")
 
@@ -53,8 +55,10 @@ function processWordForAIGuess() {
             contextString += "0"
         }else if(box.style.backgroundColor == "yellow"){
             contextString += "1"
+            yellows.push(box.textContent)
         }else{
             contextString += "2"
+            greens[i] = box.textContent
         }
 
         guessString += box.textContent
@@ -62,6 +66,10 @@ function processWordForAIGuess() {
 
     guessContext.push(contextString)
     guessHistory.push(guessString)
+
+    console.log(greens)
+
+    console.log(yellows)
 
     postGuess()
 
@@ -184,25 +192,48 @@ document.getElementById("keyboard-cont").addEventListener("click", (e) => {
 
 // Event listener toggling boxes
 document.getElementById("solver").addEventListener("click", (e) => {
-    var board = document.getElementById("solver")
+    let board = document.getElementById("solver")
     const target = e.target
+    let row = board.children[6 - guessesRemaining] 
+    let currentColor = target.style.backgroundColor
 
-    if (!target.classList.contains("filled-box")) {
+    let currentLetter = target.textContent.toLowerCase()
+
+    if (!target.classList.contains("filled-box") && currentColor != "orange") {
         return
-    }else if (target.parentElement != board.children[6 - guessesRemaining]) {
+    }else if (target.parentElement != row) {
         return
     }
-    let currentColor = target.style.backgroundColor
 
     if (currentColor == "grey") {
         currentColor = "yellow"
+        target.style.backgroundColor = currentColor
+
     }else if (currentColor == "yellow") {
         currentColor = "green"
+        target.style.backgroundColor = currentColor
+
     }else if (currentColor == "green"){
         currentColor = "grey"
+        target.style.backgroundColor = currentColor
+
+    }else if (currentColor == "orange"){
+        for(let i = 0; i < 5; i++){
+            animateCSS(row.children[i], "pulse")
+            row.children[i].classList.add("filled-box")
+            currentGuess.push(row.children[i].textContent.toLowerCase())
+            if(row.children[i].textContent.toLowerCase() == greens[i]){
+                row.children[i].style.backgroundColor = "green"
+            }else if(yellows.includes(row.children[i].textContent.toLowerCase())){
+                row.children[i].style.backgroundColor = "yellow"
+            }else{
+                row.children[i].style.backgroundColor = "grey"
+            }
+        }
+        nextLetter = 5
+        console.log(currentGuess)
     }
 
-    target.style.backgroundColor = currentColor
 })
 
 // Delete letter from box
