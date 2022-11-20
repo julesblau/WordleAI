@@ -77,6 +77,10 @@ function processWordForAIGuess() {
     currentGuess = []
     nextLetter = 0
 
+    if(contextString === "22222"){
+        toastr.success("You solved the Wordle, Congrats!")
+        guessesRemaining = 0
+    }
     if (guessesRemaining == 0) {
         currentGuess = []
         guessHistory = []
@@ -197,7 +201,7 @@ document.getElementById("solver").addEventListener("click", (e) => {
     let row = board.children[6 - guessesRemaining] 
     let currentColor = target.style.backgroundColor
 
-    let currentLetter = target.textContent.toLowerCase()
+    let index = Array.prototype.indexOf.call(row.children, target)
 
     if (!target.classList.contains("filled-box") && currentColor != "orange") {
         return
@@ -213,7 +217,7 @@ document.getElementById("solver").addEventListener("click", (e) => {
         currentColor = "green"
         target.style.backgroundColor = currentColor
 
-    }else if (currentColor == "green"){
+    }else if (currentColor == "green" && greens[index] != target.textContent.toLowerCase()){
         currentColor = "grey"
         target.style.backgroundColor = currentColor
 
