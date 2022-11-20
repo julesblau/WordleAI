@@ -4,6 +4,7 @@ let currentGuess = []
 let nextLetter = 0
 let guessHistory = []
 let guessContext = []
+let aiSuggestedGuess = ""
 
 let board = document.getElementById("solver")
 
@@ -24,8 +25,17 @@ function initRow() {
 }
 
 // Wrapper fuction to check AI guess based on difficulty
-async function checkAIGuess() {
-    await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { checkAiLogic(value) })
+async function getAIGuess() {
+    await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { 
+
+        let row = document.getElementById("solver").children[6 - guessesRemaining]
+        for (let i = 0; i < 5; i++) {
+            let box = row.children[i]
+            box.textContent = value[i]
+            animateCSS(box, 'flipInX')
+            box.style.backgroundColor = "orange"
+        }
+     })
 }
 
 // Logic to prepare user guess for AI suggestion 
@@ -53,6 +63,8 @@ function processWordForAIGuess() {
     guessContext.push(contextString)
     guessHistory.push(guessString)
 
+    postGuess()
+
     guessesRemaining -= 1
     currentGuess = []
     nextLetter = 0
@@ -63,8 +75,8 @@ function processWordForAIGuess() {
         guessContext = []
         clearServer()
     } else {
-        postGuess()
         initRow()
+        getAIGuess()
     }
 
 }
