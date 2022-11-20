@@ -14,11 +14,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </head>
 
-<body style="text-align: center;">
+<body>
+    <div onload class="pop-up" id="instructions">
+        <button style = "float: right;" id="close" onclick= hidePopUp()>X</button>
+        <h1>Instructions</h1>
+        <h2>Steps:</h2>
+        <p>
+            1. Input word on Wordle or similar 5 letter word game.
+            <br>
+            <br>
+            2. Input that word into Solver but <b><u>DO NOT</u></b> hit enter.
+            <br>
+            <br>
+            3. Click on each letter to reflect the color given by Wordle.
+            <br>
+            <br>
+            4. Hit enter and repeat steps.
+        </p>
+    </div>
+    <script>
+        function hidePopUp(){
+            document.getElementById("instructions").style.display = "none"
+        }
+    </script>
     <div class="title">
         <a href="index.html">
-            <h1> WordleSolver </h1>
+            <h1>WordleAI</h1>
         </a>
+        <h2>Solver</h2>
     </div>
 
     
