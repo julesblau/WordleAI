@@ -62,6 +62,7 @@ function processWordForAIGuess() {
         }
 
         guessString += box.textContent
+        shadeKeyBoard(box.textContent, box.style.backgroundColor)
     }
 
     guessContext.push(contextString)
