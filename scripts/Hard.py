@@ -46,6 +46,7 @@ if __name__ == '__main__':
                 add = True
                 for k in range(5):
                     if currLetter in yellows[k]:
+                        duplicates.append(currLetter)
                         add = False
                 if add:
                     grays.append(currLetter)
