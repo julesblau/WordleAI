@@ -6,14 +6,12 @@ https://github.com/Morgenstern2573/wordle_clone/blob/master/build/style.css */
 }
 
 body{
-  text-align: center;
   background-color: #72d5bf;
   margin-bottom: -110px;
   z-index: -10;
 }
 
 h1 {
-  text-align: center;
   text-decoration: none;
   margin-bottom: 0px;
   color: black;
