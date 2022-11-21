@@ -15,7 +15,13 @@ body{
 h1 {
   text-align: center;
   text-decoration: none;
+  margin-bottom: 0px;
   color: black;
+}
+
+h2{
+  text-align: center;
+  margin-top: 4px;
 }
 
 .button {
