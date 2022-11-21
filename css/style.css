@@ -157,6 +157,7 @@ table tr td:empty{
 }
 
 .letter-box {
+  font-family: sans-serif, bold;
   border: 2px solid gray;
   border-radius: 3px;
   margin: 2px;
@@ -165,6 +166,7 @@ table tr td:empty{
   height: 3rem;
   width: 3rem;
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
   text-transform: uppercase;
@@ -195,6 +197,7 @@ table tr td:empty{
 }
 
 .keyboard-button {
+  font-family: sans-serif, bold;
   font-size: 1rem;
   font-weight: 700;
   padding: 0.5rem;
