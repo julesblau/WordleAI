@@ -140,6 +140,14 @@ function insertLetter(pressedKey) {
 
     let row = document.getElementById("solver").children[6 - guessesRemaining]
     let box = row.children[nextLetter]
+
+    if(box.style.backgroundColor == "orange") {
+        for(let i = 0; i < 5; i++) {
+            row.children[i].style.backgroundColor = "white"
+            row.children[i].textContent = ''
+        }
+    }
+
     animateCSS(box, "pulse")
     box.textContent = pressedKey
     box.classList.add("filled-box")
