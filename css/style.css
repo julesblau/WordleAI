@@ -209,7 +209,7 @@ table tr td:empty{
 
 /* The popup form - hidden by default */
 .pop-up {
-  top: 10%;
+  top: 9%;
   left: 25%;
   width: 50%;
   background-color: white;
