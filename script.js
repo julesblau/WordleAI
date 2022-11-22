@@ -16,6 +16,7 @@ let currDifficulty = Difficulty.Easy // Default to easy if there is an error wit
 const params = new URLSearchParams(document.location.search)
 const diffParam = params.get("difficulty")
 currDifficulty = diffParam
+document.getElementById("subheader").textContent = "Head to Head: " + currDifficulty.charAt(0).toUpperCase() + currDifficulty.slice(1)
 
 // Initialize all global variables
 const NUMBER_OF_GUESSES = 6
