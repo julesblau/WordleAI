@@ -7,8 +7,6 @@ if __name__ == '__main__':
     wordListFile = open("resources/solutions.txt", "r")
     wordList = wordListFile.read().split("\n")
 
-    output = open("scripts/outputtext.txt", "w")
-
     # Create lists to hold context of letters
     greens = [None, None, None, None, None]
     yellows = [[], [], [], [], []]
@@ -53,9 +51,6 @@ if __name__ == '__main__':
             elif (context[i])[j] == '0' and currLetter in greens:
                 duplicates.append(currLetter)
 
-    output.write(','.join(duplicates))
-    output.write('\n')
-
     possibleGuesses = wordList.copy()
 
     # If word in guess list doesn't have green letter in correct position, remove word from guess list
@@ -94,11 +89,7 @@ if __name__ == '__main__':
         for letter in duplicates:
             if word.count(letter) > 1:
                 possibleGuesses.remove(word)
-                output.write(word)
-                output.write('\n')
                 break
-
-    output.write(','.join(possibleGuesses))
 
     # Choose random word from remaining (valid) words
     guess = np.random.choice(possibleGuesses)
@@ -106,7 +97,6 @@ if __name__ == '__main__':
 
     wordList = wordListFile.read().split("\n")
     wordListFile.close()
-    output.close()
     possibleGuesses = wordList.copy()
     
     sys.stdout.flush()
