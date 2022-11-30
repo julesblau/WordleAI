@@ -192,7 +192,7 @@ async function getMetrics() {
 
     console.log("Games Simulated: " + gamesSimulated)
     console.log("Times Solved: " + timesSolved + " (" + (timesSolved / gamesSimulated * 100).toFixed(2) + "%)") 
-    console.log("Average Number of Guesses to Solution: " + guessesToSolve / timesSolved)
+    console.log("Average Number of Guesses to Solution: " + (guessesToSolve / timesSolved).toFixed(2))
 
 }
 
