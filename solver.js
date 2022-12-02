@@ -28,7 +28,7 @@ function initRow() {
 
 // Wrapper fuction to check AI guess based on difficulty
 async function getAIGuess() {
-    await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { 
+    await getGuess('http://localhost:8889/py-data-solver-get').then((value) => { 
 
         let row = document.getElementById("solver").children[6 - guessesRemaining]
         for (let i = 0; i < 5; i++) {

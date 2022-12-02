@@ -7,12 +7,12 @@ import { SOLUTIONS } from "./resources/solutions.js"
 import { GUESSES } from "./resources/valid_guesses.js"
 
 const Difficulty = {
-    Easy: "easy",
-    Medium: "medium",
-    Hard: "hard",
+    Beginner: "beginner",
+    Expert: "expert",
+    // Hard: "hard",
 }
 
-let currDifficulty = Difficulty.Easy // Default to easy if there is an error with parameter handling
+let currDifficulty = Difficulty.Beginner // Default to beginner if there is an error with parameter handling
 const params = new URLSearchParams(document.location.search)
 const diffParam = params.get("difficulty")
 currDifficulty = diffParam
@@ -154,14 +154,11 @@ function checkPlayerGuess() {
 async function checkAIGuess() {
 
     switch (currDifficulty) {
-        case Difficulty.Easy:
-            await getGuess('http://localhost:8889/py-data-easy-get').then((value) => { checkAiLogic(value) })
-            break
-        case Difficulty.Medium:
-            await getGuess('http://localhost:8889/py-data-medium-get').then((value) => { checkAiLogic(value) })
+        case Difficulty.Expert:
+            await getGuess('http://localhost:8889/py-data-expert-get').then((value) => { checkAiLogic(value) })
             break
         default:
-            await getGuess('http://localhost:8889/py-data-hard-get').then((value) => { checkAiLogic(value) })
+            await getGuess('http://localhost:8889/py-data-beginner-get').then((value) => { checkAiLogic(value) })
             break
     }
 
