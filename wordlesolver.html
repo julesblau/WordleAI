@@ -1,6 +1,5 @@
-<!--Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
-    https://github.com/Morgenstern2573/wordle_clone/blob/master/build/index.html -->
 <!--Favicon by NYTimes -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +7,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WordleAI: Head to Head</title>
+    <title>WordleAI: Solver</title>
     <link rel="icon" href="https://www.nytimes.com/games-assets/v2/metadata/wordle-apple-touch-icon.png?v=v2211081315">
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
@@ -19,26 +18,47 @@
 </head>
 
 <body>
+    <div onload class="pop-up" id="instructions">
+        <button style = "float: right;" id="close" onclick= hidePopUp()>X</button>
+        <h1>Instructions</h1>
+        <h2>Steps:</h2>
+        <p>
+            1. Input word on Wordle or similar 5 letter word game and hit enter.
+            <br>
+            <br>
+            2. Input that word into Solver but <b><u>DO NOT</u></b> hit enter.
+            <br>
+            <br>
+            3. Click on each letter to reflect the color given by Wordle.
+            <br>
+            <br>
+            4. Hit enter.
+            <br>
+            <br>
+            5. The AI will populate a word on the next row in orange.
+            <br>
+            <br>
+            6. If you want, use that word in wordle then click on any letter in solver to assign colors.
+            <br>
+            <br>
+            7. Hit enter and repeat steps.
+        </p>
+    </div>
+    <script>
+        function hidePopUp(){
+            document.getElementById("instructions").style.display = "none"
+        }
+    </script>
     <div class="title">
         <a href="index.html">
             <h1>WordleAI</h1>
         </a>
-        <h2 id="subheader">Head to Head</h2>
+        <h2>Solver</h2>
     </div>
 
-    <div id="game-boards">
-        <table class="center">
-            <tr>
-                <td>
-                    <div id="player-game-board" class="game-board"> Player </div>
-                </td>
-                <td></td>
-                <td>
-                    <div id="ai-game-board" class="game-board"> AI </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+    
+    <div id="solver" class="game-board"></div>
+    
 
     <div id="keyboard-cont">
         <div class="first-row">
@@ -79,8 +99,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script src="script.js" type="module"></script>
-    <script src="/resources/confetti.js" type="module"></script>
+    <script src="solver.js" type="module"></script>
 </body>
 
 </html>

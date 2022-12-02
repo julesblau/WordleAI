@@ -22,14 +22,19 @@ const spawn = require('child_process').spawn
     })
   }
 
-//Set endpoint for sending python EASY MODE data. Collect Ensuing Guesses
-app.get('/py-data-easy-get', async (req, res) => {
-  await getGuess('python3', ['scripts/Easy.py', guess, context]).then((value) => { res.send(value) })
+//Set endpoint for sending python BEGINNER MODE data. Collect Ensuing Guesses
+app.get('/py-data-beginner-get', async (req, res) => {
+  await getGuess('python3', ['scripts/Beginner.py', guess, context]).then((value) => { res.send(value) })
 })
 
-//Set endpoint for sending python MEDIUM MODE data. Collect Ensuing Guesses
-app.get('/py-data-medium-get', async (req, res) => {
-  await getGuess('python3', ['scripts/Medium.py', guess, context]).then((value) => { res.send(value) })
+//Set endpoint for sending python EXPERT MODE data. Collect Ensuing Guesses
+app.get('/py-data-expert-get', async (req, res) => {
+  await getGuess('python3', ['scripts/Expert.py', guess, context]).then((value) => { res.send(value) })
+})
+
+//Set endpoint for sending python SOLVER MODE data. Collect Ensuing Guesses
+app.get('/py-data-solver-get', async (req, res) => {
+  await getGuess('python3', ['scripts/Solver.py', guess, context]).then((value) => { res.send(value) })
 })
 
 //Set endpoint to recieve data from Script for Python AI

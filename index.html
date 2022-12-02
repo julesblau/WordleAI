@@ -7,26 +7,30 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wordle AI</title>
+  <title>WordleAI</title>
   <link rel="icon" href="https://www.nytimes.com/games-assets/v2/metadata/wordle-apple-touch-icon.png?v=v2211081315">
   <link rel="stylesheet" href="css/style.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Teko:wght@300&display=swap" rel="stylesheet">
 </head>
 
 <body style="text-align: center;">
-  <h1> Wordle AI </h1>
+  <h1> WordleAI </h1>
   <div class="dropdown">
     <button class="dropbtn">Head to Head</button>
     <div class="dropdown-content">
-      <a href="headtohead.html?difficulty=easy">Easy</a>
-      <a href="headtohead.html?difficulty=medium">Medium</a>
-      <a href="headtohead.html?difficulty=hard">Hard</a>
+      <a href="headtohead.html?difficulty=beginner">Beginner</a>
+      <a href="headtohead.html?difficulty=expert">Expert</a>
+      <!-- <a href="headtohead.html?difficulty=hard">Hard</a> -->
     </div>
   </div>
-
-  <button class="button">Wordle++</button>
-  <button class="button">Solver</button>
+  <a href = "wordlesolver.html">
+    <button class="button">WordleSolver</button>
+  </a>
+  <!-- <button class="button">Wordle++</button> -->
 </body>
 
 </html>

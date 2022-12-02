@@ -19,34 +19,25 @@ if __name__ == '__main__':
 
     # For each letter in each word
     for i in range(len(context)):
-        # f.write(guessHistory[i])
-        # f.write("\n")
         for j in range(5):
             currLetter = (guessHistory[i])[j]
 
-            # If we recieve 2, add letter to green list in correct position
+            # If context is 2, add letter to green list in correct position
             if (context[i])[j] == '2':
                 greens[j] = currLetter
                 if currLetter in yellows:
                     yellows.remove(currLetter)
 
-            # If we recieve 1, add letter to yellow list if not there
+            # If context is 1, add letter to yellow list if not there
             elif (context[i])[j] == '1' and currLetter not in yellows and currLetter not in greens:
                 yellows.append(currLetter)
 
     possibleGuesses = wordList.copy()
 
+    # If word in guess list has been guessed previously, remove word from guess list
     for word in wordList:
         if word in guessHistory:
             possibleGuesses.remove(word)
-            # f.write(word)
-            # f.write("\n")
-
-
-    # for i in range(len(guessHistory)):
-    #     # possibleGuesses.remove(guessHistory[i])
-    #     f.write(word)
-    #     f.write("\n")
 
     wordList = possibleGuesses.copy()
 
