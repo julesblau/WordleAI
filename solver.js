@@ -68,10 +68,6 @@ function processWordForAIGuess() {
     guessContext.push(contextString)
     guessHistory.push(guessString)
 
-    console.log(greens)
-
-    console.log(yellows)
-
     postGuess()
 
     guessesRemaining -= 1
@@ -244,7 +240,6 @@ document.getElementById("solver").addEventListener("click", (e) => {
             }
         }
         nextLetter = 5
-        console.log(currentGuess)
     }
 
 })
@@ -296,6 +291,5 @@ function shadeKeyBoard(letter, color) {
         }
     }
 }
-
 
 initRow()

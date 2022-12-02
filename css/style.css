@@ -2,7 +2,6 @@
 https://github.com/Morgenstern2573/wordle_clone/blob/master/build/style.css */
 
 *{
-  /* font-family: sans-serif, bold; */
   font-family: 'Teko';
   font-size: 18px;
   resize: both;
@@ -15,7 +14,6 @@ body{
 }
 
 h1 {
-  /* font-family: 'Teko'; */
   font-size: 60px;
   text-decoration: none;
   color: black;

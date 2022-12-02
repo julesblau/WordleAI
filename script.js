@@ -1,5 +1,6 @@
 // Based on wordle_clone by GitHub Username: Morgenstern2573 (Author)
 // https://github.com/Morgenstern2573/wordle_clone/blob/master/build/script.js
+
 import { startConfetti } from "./resources/confetti.js"
 import { stopConfetti } from "./resources/confetti.js"
 
@@ -9,7 +10,6 @@ import { GUESSES } from "./resources/valid_guesses.js"
 const Difficulty = {
     Beginner: "beginner",
     Expert: "expert",
-    // Hard: "hard",
 }
 
 let currDifficulty = Difficulty.Beginner // Default to beginner if there is an error with parameter handling
@@ -26,8 +26,6 @@ let nextLetter = 0
 let correctGuessString = SOLUTIONS[Math.floor(Math.random() * SOLUTIONS.length)]
 let aiGuessHistory = []
 let aiGuessContext = []
-
-console.log(correctGuessString)
 
 // Initialize player and AI boards
 function initBoard(boardName) {

@@ -7,8 +7,6 @@ if __name__ == '__main__':
     wordListFile = open("resources/solutions.txt", "r")
     wordList = wordListFile.read().split("\n")
 
-    f = open("scripts/outputtext.txt", "w")
-
     # Create lists to hold context of letters
     greens = [None, None, None, None, None]
     yellows = []
@@ -57,19 +55,11 @@ if __name__ == '__main__':
             if letter not in word:
                 possibleGuesses.remove(word)
                 break
-    
-    f.write("Possible Guesses: ")
-    f.write(str(possibleGuesses))
-    f.write("\n")
 
     # Choose random word from remaining (valid) words
     guess = np.random.choice(possibleGuesses)
-    f.write("Guess: ")
-    f.write(guess)
-    f.write("\n")
     print(guess)
     wordList = wordListFile.read().split("\n")
     wordListFile.close()
     possibleGuesses = wordList.copy()
-    f.close()
     sys.stdout.flush()

@@ -5,7 +5,6 @@ app.use(express.json())
 
 //Recieve random guess to start always
 var context = undefined
-var aiGuess = undefined
 var guess = undefined
 
 const spawn = require('child_process').spawn
