@@ -168,7 +168,7 @@ async function clearServer() {
 
 //Simulate a number of games to test AI accuracy
 async function getMetrics() {
-    let gamesSimulated = 50
+    let gamesSimulated = 250
 
     console.log("Starting Simulation of " + gamesSimulated + " games...")
     
@@ -184,7 +184,11 @@ async function getMetrics() {
             await checkAIGuess()
         }
 
-        if(i % (gamesSimulated / 10) == 0) {
+        // if(i % (gamesSimulated / 10) == 0) {
+        //     console.log(i + "/" + gamesSimulated)
+        // }
+
+        if(gamesSimulated % 10 == 0) {
             console.log(i + "/" + gamesSimulated)
         }
         
