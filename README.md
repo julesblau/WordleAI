@@ -17,3 +17,6 @@ https://www.python.org/downloads/
 5. Launch the Express server by entering 'node server.js' from the terminal. Make sure you are in the WordleAI directory. This will launch the application on port 8889. We recommend using Chrome, however it also works on Safari. Visit http://localhost:8889/ once the server is started to play the game.
 
 6. Enjoy playing our game!
+
+
+![WordleAI Poster](https://user-images.githubusercontent.com/71992266/211429194-a3e4ecd3-6238-4b44-9cac-798a454f0c20.jpg)
